@@ -18,7 +18,6 @@ import ast
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
-import os.path
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -109,8 +108,6 @@ async def on_message(message):
 	
 	if message.content.upper().startswith("STATUS!"):
 		server=client.get_server(os.getenv('SERVER_ID'))
-		if os.path.isfile('stats.png') == "True":
-			os.remove("stats.png")
 		mem_list = server.members
 		online = 0
 		offline = 0
@@ -133,7 +130,7 @@ async def on_message(message):
 		status_mems = [online,offline,idle,do_not_disturb]
 		plt.bar(y_pos, status_mems, align='center', alpha=0.5, color = ['green','grey','yellow','red'])
 		plt.xticks(y_pos, stats)
-		plt.yticks(np.arange(0, len((mem_list)), step=1))
+		plt.yticks(np.arange(0,max(status_mems)+1, step=1))
 		plt.ylabel('Members')
 		plt.title('Status Statistics')
 		plt.savefig('stats.png')
