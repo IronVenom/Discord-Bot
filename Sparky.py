@@ -224,6 +224,7 @@ async def on_message(message):
 		embed.add_field(name='sparkygif! gif topic',value='Posts a GIF on the mentioned topic', inline=False)
 		embed.add_field(name='poll! item1-without-spaces item2-without-spaces',value='Creates a 2 item poll', inline=False)
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
+		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		
 	#MOD Commands Help
@@ -585,6 +586,24 @@ async def on_message(message):
 		else:
 			embed = discord.Embed(title="Warning!",description="Type a number between 1 and 4 only (both inclusive)!",colour=discord.Color.red())
 			await client.send_message(message.channel,embed=embed)
+			
+	# Fight
+	
+	if message.content.upper().startswith("FIGHT!"):
+		turns = random.randint(3,14)
+		fights = ["used the infinity gauntlet against","used the one ring against","used their shoes against","gave a bomb to","used their mental energy to kill","went super saiyan mode and blasted",
+		"ate ice cream and threw the empty cone at","used the elder wand and cursed","used a dead meme against","said meep and ran away from"]
+		person_1 = message.author.mention
+		person_2 = message.content.split(' ')[1]
+		embed = discord.Embed(title='SPARKY\'S ARENA',description="Let the fight begin!",color=discord.Color.blue())
+		for i in range(1,turns):
+			if i%2 == 0:
+				embed.add_field(name='Round {}'.format(i),value="{} {} {}".format(person_2,random.choice(fights),person_1),inline = False)
+			else:
+				embed.add_field(name='Round {}'.format(i),value="{} {} {}".format(person_1,random.choice(fights),person_2),inline = False)
+		await client.send_message(message.channel,embed=embed)
+		wlt = ["{} has defeated {}".format(person_1,person_2),"{} has defeated {}".format(person_2,person_1),"It's a tie!"]
+		embed = discord.Embed(title="Result of the battle",description=random.choice(wlt),color=discord.Color.green())
 		
 #Introduction of a new user. Note that in asyncio the ids are strings.	
 
