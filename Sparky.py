@@ -604,6 +604,7 @@ async def on_message(message):
 		await client.send_message(message.channel,embed=embed)
 		wlt = ["{} has defeated {}".format(person_1,person_2),"{} has defeated {}".format(person_2,person_1),"It's a tie!"]
 		embed = discord.Embed(title="Result of the battle",description=random.choice(wlt),color=discord.Color.green())
+		await client.send_message(message.channel,embed=embed)
 		
 #Introduction of a new user. Note that in asyncio the ids are strings.	
 
