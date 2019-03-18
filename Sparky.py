@@ -3,6 +3,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
 import time
+from datetime import datetime
 import math
 import imdb
 import os
@@ -168,7 +169,6 @@ async def on_message(message):
 			members.append(i)
 		members = tuple (members)
 		membs = np.arange(len(members))
-		print(members,messages,membs)
 		colors = ['green','blue','orange','yellow','purple']
 		if len(sorted(freq.items(), key=operator.itemgetter(1),reverse = True)) > 5:
 			plt.bar(membs,messages, align='center', alpha=0.5, color = colors)
