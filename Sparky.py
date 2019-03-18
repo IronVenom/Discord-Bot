@@ -175,7 +175,7 @@ async def on_message(message):
 		else:
 			plt.bar(membs,messages, align='center', alpha=0.5, color =colors [:len(sorted(freq.items(), key=operator.itemgetter(1),reverse = True))])
 		plt.xticks(membs,members)
-		plt.yticks(np.arange(0,max(messages)+1,step = 100*(max(messages)//100)))
+		plt.yticks(np.arange(0,max(messages)+1,step = 50*(max(messages)//100)))
 		plt.ylabel('Frequency of Messages')
 		plt.xlabel('Members')
 		plt.title('TOP 5 Members')
