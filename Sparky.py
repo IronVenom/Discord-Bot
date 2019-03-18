@@ -18,6 +18,7 @@ import ast
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
+import operator
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -104,7 +105,9 @@ async def on_message(message):
 		embed.add_field(name='Owner:',value=owner_name,inline=False)
 		await client.send_message(message.channel,embed=embed)
 	
-	# 3.) Bar Plot depicting statuses of people 
+	# Server Data Analysis
+	
+	# Bar Plot depicting statuses of people 
 	
 	if message.content.upper().startswith("STATUS!"):
 		server=client.get_server(os.getenv('SERVER_ID'))
@@ -135,6 +138,49 @@ async def on_message(message):
 		plt.title('Status Statistics')
 		plt.savefig('stats.png')
 		await client.send_file(message.channel,'stats.png')
+		plt.clf()
+	
+	# Message Database Analysis 
+	
+	if message.content.upper().startswith("MESSAGES!"):
+		server=client.get_server(os.getenv('SERVER_ID'))
+		mem_list = server.members
+		freq ={}
+		for mem in mem_list:
+			freq[mem.name] = 0
+		async for message in client.logs_from(message.channel,limit = 10000000000000000000000000000000000000000000000000000000000000000000000000000000, before = datetime.now()):
+			try:
+				freq[message.author.name] += 1
+			except KeyError:
+				continue
+		embed = discord.Embed(title="Message Database",description="Top 5 Active Members for {}".format(message.channel.mention),color = discord.Color.blue())
+		if len(sorted(freq.items(), key=operator.itemgetter(1),reverse = True)) > 5:
+			freq = dict(sorted(freq.items(), key=operator.itemgetter(1),reverse = True)[:5])
+		else:
+			freq = dict(sorted(freq.items(), key=operator.itemgetter(1),reverse = True))
+		for i,j in freq.items():
+			embed.add_field(name = i , value = j,inline = False)
+		await client.send_message(message.channel,embed = embed)
+		members = []
+		messages = []
+		for i,j in freq.items():
+			messages.append(j)
+			members.append(i)
+		members = tuple (members)
+		membs = np.arange(len(members))
+		print(members,messages,membs)
+		colors = ['green','blue','orange','yellow','purple']
+		if len(sorted(freq.items(), key=operator.itemgetter(1),reverse = True)) > 5:
+			plt.bar(membs,messages, align='center', alpha=0.5, color = colors)
+		else:
+			plt.bar(membs,messages, align='center', alpha=0.5, color =colors [:len(sorted(freq.items(), key=operator.itemgetter(1),reverse = True))])
+		plt.xticks(membs,members)
+		plt.yticks(np.arange(0,max(messages)+1,step = 100*(max(messages)//100)))
+		plt.ylabel('Frequency of Messages')
+		plt.xlabel('Members')
+		plt.title('TOP 5 Members')
+		plt.savefig('msg_Stats.png')
+		await client.send_file(message.channel,'msg_Stats.png')
 		plt.clf()
 	
 	#Moderation Commands
@@ -188,7 +234,16 @@ async def on_message(message):
 		embed.add_field(name='servhelp!',value='Server Commands',inline=False)
 		embed.add_field(name='funhelp!',value='Fun Commands',inline=False)
 		embed.add_field(name='utilhelp!',value='General Utility Commands help',inline=False)
+		embed.add_field(name='datahelp!',value='Data Analysis Commands help',inline=False)
 		await client.send_message(message.channel,embed=embed)
+		
+	# Data Analysis Commands
+	
+	if message.content.upper().startswith('DATAHELP!'):
+		embed=discord.Embed(title='Data Analysis Commands',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.blue())
+		embed.add_field(name='status!',value='Gives a bar plot depicting the statuses of people on the server.',inline=False)
+		embed.add_field(name='messages!',value='Gives the database and bar plot for Top 5 Active members for the channel in which the command was typed',inline=False)
+		await client.send_message(message.channel,embed = embed)
 	
 	# General Utility Commands 
 
@@ -204,7 +259,6 @@ async def on_message(message):
 		embed=discord.Embed(title='Server Commands',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.gold())
 		embed.add_field(name='roles!',value='Gives all the roles present in the server.',inline=False)
 		embed.add_field(name='info!',value='Gives server info.',inline=False)
-		embed.add_field(name='status!',value='Gives a plot depicting the statuses of people on the server.',inline=False)
 		embed.add_field(name='profile!',value='Check out your profile card.',inline=False)
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
 		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
@@ -605,6 +659,8 @@ async def on_message(message):
 		wlt = ["{} has defeated {}".format(person_1,person_2),"{} has defeated {}".format(person_2,person_1),"It's a tie!"]
 		embed = discord.Embed(title="Result of the battle",description=random.choice(wlt),color=discord.Color.green())
 		await client.send_message(message.channel,embed=embed)
+	
+	
 		
 #Introduction of a new user. Note that in asyncio the ids are strings.	
 
