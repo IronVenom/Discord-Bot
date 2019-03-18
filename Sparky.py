@@ -160,7 +160,8 @@ async def on_message(message):
 		else:
 			freq = dict(sorted(freq.items(), key=operator.itemgetter(1),reverse = True))
 		for i,j in freq.items():
-			embed.add_field(name = i , value = j,inline = False)
+			if j != 0: 
+				embed.add_field(name = i , value = j,inline = False)
 		await client.send_message(message.channel,embed = embed)
 		members = []
 		messages = []
