@@ -177,7 +177,6 @@ async def on_message(message):
 		plt.xticks(membs,members)
 		plt.yticks(np.arange(0,max(messages)+1,step = 50*(max(messages)//100)))
 		plt.ylabel('Frequency of Messages')
-		plt.xlabel('Members')
 		plt.title('TOP 5 Members')
 		plt.savefig('msg_Stats.png')
 		await client.send_file(message.channel,'msg_Stats.png')
