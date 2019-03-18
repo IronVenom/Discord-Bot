@@ -158,7 +158,14 @@ async def on_message(message):
 			freq = dict(sorted(freq.items(), key=operator.itemgetter(1),reverse = True)[:5])
 		else:
 			freq = dict(sorted(freq.items(), key=operator.itemgetter(1),reverse = True))
-		embed = discord.Embed(title="Message Database",description="Top {} Active Members for {}".format(len(freq),message.channel.mention),color = discord.Color.blue())
+		count = 0
+		for i,j in freq.items():
+			if j != 0: 
+				count += 1
+		if count > 5:
+			embed = discord.Embed(title="Message Database",description="Top 5 Active Members for {}".format(message.channel.mention),color = discord.Color.blue())
+		else:
+			embed = discord.Embed(title="Message Database",description="Top {} Active Members for {}".format(count,message.channel.mention),color = discord.Color.blue())
 		for i,j in freq.items():
 			if j != 0: 
 				embed.add_field(name = i , value = j,inline = False)
