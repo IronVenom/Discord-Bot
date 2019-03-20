@@ -15,7 +15,9 @@ A Discord Bot made using Python and Discordpy as a pet project.
 * Daily news feature
 * Wikipedia search feature
 * Basic server management commands
+* Basic server data visualization commands
 * Random jokes command
 * Language Translation command - translate languages from one to the other.
 * Calculator
 * Google Search ( Programming Doubts )
+* Experience System
