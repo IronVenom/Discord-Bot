@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
 import operator
+import json
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -35,6 +36,18 @@ async def on_ready():
 #Commands.
 @client.event
 async def on_message(message):
+	
+	# Experience System
+
+	with open('users.json','r') as f:
+		users = json.load(f)
+
+	await update_data(users,message.author)
+	await add_experience(users, message.author, 5)
+	await level_up(users, message.author, message.channel)
+
+	with open('users.json','w') as f:
+		json.dump(users, f)
 	
 	#Greetings and Cookies and Random Stuff
 	
@@ -477,44 +490,50 @@ async def on_message(message):
 	#Profile
 
 	if message.content.upper().startswith('PROFILE!'):
-		server=client.get_server(os.getenv('SERVER_ID'))
 		if message.content.upper() == "PROFILE!":
+			server=client.get_server(os.getenv('SERVER_ID'))
 			name = message.author.name
 			pfp = message.author.avatar_url
 			joindate = message.author.joined_at
 			roles = message.author.roles
+			level = users[message.author.id]['level']
 			string = []
 			for item in roles:
 				if item.name!='@everyone':
 					string.append(item.mention)
 			string = list(reversed(string))
 			string='  '.join(string)
-			embed = discord.Embed(title='PROFILE',description=server.name.upper(),colour=discord.Colour.teal())
+			embed = discord.Embed(title='PROFILE',description=server.name,colour=discord.Colour.teal())
 			embed.set_thumbnail(url=pfp)
-			embed.add_field(name='Name:',value=name,inline='False')
-			embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='False')
+			embed.add_field(name='Name:',value=name,inline='True')
+			embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='True')
+			embed.add_field(name='Level:',value=level,inline='False')
 			embed.add_field(name='Roles:',value=string,inline='False')
 			await client.send_message(message.channel,embed=embed)
 		else:
+			server=client.get_server(os.getenv('SERVER_ID'))
 			for mem in server.members:
 				if mem.mentioned_in(message) ==  True:
 					name = mem.name
 					pfp = mem.avatar_url
 					joindate = mem.joined_at
 					roles = mem.roles
+					level = users[mem.id]['level']
 					string = []
 					for item in roles:
 						if item.name!='@everyone':
 							string.append(item.mention)
 					string = list(reversed(string))
 					string='  '.join(string)
-					embed = discord.Embed(title='PROFILE',description=server.name.upper(),colour=discord.Colour.teal())
+					embed = discord.Embed(title='PROFILE',description=server.name,colour=discord.Colour.teal())
 					embed.set_thumbnail(url=pfp)
-					embed.add_field(name='Name:',value=name,inline='False')
-					embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='False')
+					embed.add_field(name='Name:',value=name,inline='True')
+					embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='True')
+					embed.add_field(name='Level:',value=level,inline='False')
 					embed.add_field(name='Roles:',value=string,inline='False')
 					await client.send_message(message.channel,embed=embed)
 					break
+					
 	#Translate Commands
 
 	if message.content.upper().startswith('TRANSLATE!'):
@@ -668,6 +687,78 @@ async def on_message(message):
 		embed = discord.Embed(title="Result of the battle",description=random.choice(wlt),color=discord.Color.green())
 		await client.send_message(message.channel,embed=embed)
 	
+# EXPERIENCE SYSTEM
+
+async def update_data(users, user):
+	if not user.id in users:
+		users[user.id]={}
+		users[user.id]['experience'] = 0
+		users[user.id]['level'] = 1
+
+async def add_experience(users,user,exp):
+	users[user.id]['experience'] += exp 
+
+async def level_up(users, user, channel) :
+	experience = users[user.id]['experience']
+	lvl_start = users[user.id]['level']
+	lvl_end = int(experience**(1/4))
+
+	if lvl_start < lvl_end:
+		embed = discord.Embed(title = 'Congrats!',description='{} has leveled up to level {}'.format(user.mention,lvl_end),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+		users[user.id]['level'] = lvl_end
+
+	role1 = "Regular"
+	role2 = "Super Regular"
+	role3 = "Super Duper Regular"
+	role4 = "Amazingly Regular"
+	role5 = "Super Duper Amazingly Regular"
+	role6 = "Omega Member"
+ 
+	server=client.get_server(os.getenv('SERVER_ID'))
+	for role in server.roles:
+		if role.name == role1:
+			role1 = role
+		if role.name == role2:
+			role2 = role
+		if role.name == role3:
+			role3 = role
+		if role.name == role4:
+			role4 = role
+		if role.name == role5:
+			role5 = role
+		if role.name == role6:
+			role6 = role
+
+	if users[user.id]['level'] == 10:
+		await client.add_roles(user,role1)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role1.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+
+	if users[user.id]['level'] == 20:
+		await client.add_roles(user,role2)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role2.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+
+	if users[user.id]['level'] == 40:
+		await client.add_roles(user,role3)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role3.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+
+	if users[user.id]['level'] == 50:
+		await client.add_roles(user,role4)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role4.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+
+	if users[user.id]['level'] == 80:
+		await client.add_roles(user,role5)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role5.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
+
+	if users[user.id]['level'] == 100:
+		await client.add_roles(user,role6)
+		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role6.mention),color=discord.Color.blue())
+		await client.send_message(channel,embed = embed)
 	
 		
 #Introduction of a new user. Note that in asyncio the ids are strings.	
@@ -680,6 +771,16 @@ async def on_member_join(member):
 	language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
 	msg='Welcome to Sparks and Glory {}! Please look at {} before proceeding, and assign yourself a language role in {}! Have fun!'.format(userid,channel_rules.mention,language_role_channel.mention)
 	await client.send_message(channel,msg)
+	
+	# Creating an user account for exp system.
+
+	with open('users.json','r') as f:
+		users = json.load(f)
+
+	await update_data(users,member)
+
+	with open('users.json','w') as f:
+		json.dump(users, f)
 
 #Bidding goodbye when a member leaves.
 
