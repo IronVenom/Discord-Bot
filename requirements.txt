@@ -7,3 +7,4 @@ googletrans
 gsearch
 numpy
 matplotlib
+urbandictionary
