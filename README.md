@@ -23,3 +23,5 @@ A Discord Bot made using Python and Discordpy as a pet project.
 * Google Search ( Programming Doubts )
 * Experience System along with profile card and leaderboard.
 * Urban Dictionary search command.
+
+You are free to use parts of the code. Just fork the repository, and create a pull request.
