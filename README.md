@@ -1,5 +1,5 @@
 # Discord Bot
-A Discord Bot made using Python and Discordpy as a pet project.
+A Discord Bot made using Python and Discordpy as a pet project.It's a complete server bot.
 
 ### External APIs used -
 * IMDBpy
@@ -24,4 +24,4 @@ A Discord Bot made using Python and Discordpy as a pet project.
 * Experience System along with profile card and leaderboard.
 * Urban Dictionary search command.
 
-You are free to use parts of the code. Just fork the repository, and create a pull request.
+You are free to use parts of the code as long as you fork the repository.
