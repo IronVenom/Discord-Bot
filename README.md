@@ -8,6 +8,7 @@ A Discord Bot made using Python and Discordpy as a pet project.
 * NewsAPI
 * Googletrans
 * Gsearch
+* Urbandictionary
 
 ### Features - 
 * Simple games
@@ -20,4 +21,5 @@ A Discord Bot made using Python and Discordpy as a pet project.
 * Language Translation command - translate languages from one to the other.
 * Calculator
 * Google Search ( Programming Doubts )
-* Experience System
+* Experience System along with profile card and leaderboard.
+* Urban Dictionary search command.
