@@ -21,6 +21,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import operator
 import json
+import urbandictionary as ud
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -48,6 +49,122 @@ async def on_message(message):
 
 	with open('users.json','w') as f:
 		json.dump(users, f)
+	
+	#Add Topic Based Roles
+
+	if message.content.upper().startswith('TOPICROLE!'):
+		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+		if message.channel.id == topic_role_channel.id:
+			arg = ' '.join(message.content.split(' ')[1:])
+			server=client.get_server(os.getenv('SERVER_ID'))
+			role_member = None
+			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+				for role in server.roles:
+					if role.name.upper() == arg.upper():
+						await client.add_roles(message.author,role)
+						role_member = role
+						break
+				await client.delete_message(message)
+				embed = discord.Embed(title=message.author.name,description='You have been alloted the {} role!'.format(role_member.mention),colour=role_member.colour)
+				await client.send_message(message.channel,embed=embed)
+			else:
+				embed = discord.Embed(title='WARNING',description='You are not allowed to add this role.',colour=discord.Colour.red())
+				await client.send_message(message.channel,embed=embed)
+		else:
+			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
+
+
+	#Remove Topic Based Roles	
+
+	if message.content.upper().startswith('TOPICROLEREMOVE!'):
+		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+		if message.channel.id == topic_role_channel.id:
+			arg = ' '.join(message.content.split(' ')[1:])
+			server=client.get_server(os.getenv('SERVER_ID'))
+			role_member = None
+			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+				for role in server.roles:
+					if role.name.upper() == arg.upper():
+						await client.remove_roles(message.author,role)
+						role_member = role
+						break
+				await client.delete_message(message)
+				embed = discord.Embed(title=message.author.name,description='You have removed the {} role!'.format(role_member.mention),colour=role_member.colour)
+				await client.send_message(message.channel,embed=embed)
+			else:
+				embed = discord.Embed(title='WARNING',description='You are not allowed to remove this role.',colour=discord.Colour.red())
+				await client.send_message(message.channel,embed=embed)
+		else:
+			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
+
+	#TOPIC Based Roles Help
+
+	if message.content.upper().startswith('TPHELP!'):
+		embed = discord.Embed(title='Language Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
+		embed.add_field(name='TOPICROLE! name of role from above 4',value='Adds the role',inline=False)
+		embed.add_field(name='TOPICROLEREMOVE! removes role from above 4',value='Removes the role',inline=False)
+		await client.send_message(message.channel,embed=embed)
+
+		
+	# Urban Dictionary
+	
+	if message.content.upper().startswith('URBAN!'):
+		args = ' '.join(message.content.split(' ')[1:])
+		defs = ud.define(args)
+		embed = discord.Embed(title = 'Urban Dictionary',description='Hit or Miss',color = discord.Color.dark_orange())
+		for d in defs[0:3]:
+			embed.add_field(name = '-->', value = d.definition, inline = False)
+		await client.send_message(message.channel,embed = embed)
+
+	# Suggest
+		
+	if message.content.upper().startswith('SUGGEST!'):
+		args = ' '.join(message.content.split(' ')[1:])
+		name = message.author.name
+		timemsg = message.timestamp
+		embed = discord.Embed(title='Suggestion',description='Created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
+		embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
+		embed.add_field(name='Suggestion',value=args,inline= False)
+		await client.delete_message(message)
+		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
+		await client.send_message(suggestion_channel,embed = embed)
+
+	# Leaderboard command
+
+	if message.content.upper().startswith('LEADERBOARD!'):
+		server=client.get_server(os.getenv('SERVER_ID'))
+		mems = server.members
+		lis = []
+		for j in mems:
+			lis.append([j,j.id])
+		for i in lis:
+			i.append(users[i[1]]['experience'])
+		lead = [[i[0],i[2]] for i in lis]
+		lead.sort(key=operator.itemgetter(1),reverse = True)
+		embed = discord.Embed(title = 'Leaderboard',description='Monthly Experience System',color = discord.Color.dark_blue())
+		if len(lead)>5:
+			msg = '\n'
+			for j,i in enumerate(lead[:5],1):
+				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
+			embed.add_field(name = 'TOP 5 Members', value =msg,inline = False)
+		else:
+			msg = '\n'
+			for j,i in enumerate(lead,1):
+				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
+			embed.add_field(name = 'TOP {} Members'.format(len(lead)), value =msg,inline = False)
+		await client.send_message(message.channel,embed = embed)
+
+	# Google Search
+
+	if message.content.upper().startswith('GOOGLE!'):
+		args = ' '.join(message.content.split(' ')[1:])
+		query = search(args)
+		embed = discord.Embed(title='Google Search', description='Results for the query',colour=discord.Color.orange())
+		for item in query[:5]:
+			embed.add_field(name='-->',value=item,inline=False)
+		await client.send_message(message.channel,embed=embed)
 	
 	#Greetings and Cookies and Random Stuff
 	
@@ -251,6 +368,7 @@ async def on_message(message):
 		embed.add_field(name='modhelp!',value='Moderation Commands',inline=False)
 		embed.add_field(name='translatehelp!',value='Translation Commands',inline=False)
 		embed.add_field(name='lrhelp!',value='Language Based Roles Commands',inline=False)
+		embed.add_field(name='tphelp!',value='Topic Based Roles Commands',inline=False)
 		embed.add_field(name='calchelp!',value='Calculator Commands',inline=False)
 		embed.add_field(name='servhelp!',value='Server Commands',inline=False)
 		embed.add_field(name='funhelp!',value='Fun Commands',inline=False)
@@ -272,6 +390,7 @@ async def on_message(message):
 		embed = discord.Embed(title='General Utility Help', description='General Commands that dont belong in any other categories',colour=discord.Color.dark_grey())
 		embed.add_field(name='stackov! Query',value='Search for solutions to programming doubts.',inline=False)
 		embed.add_field(name='embed! text to be embedded',value = 'Embeds text.',inline = False)
+		embed.add_field(name='google! Query',value = 'Search google',inline = False)
 		await client.send_message(message.channel,embed=embed)
 	
 	#Server Related Commands
@@ -283,6 +402,8 @@ async def on_message(message):
 		embed.add_field(name='profile!',value='Check out your profile card.',inline=False)
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
 		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
+		embed.add_field(name='sugest! suggestion',value='Create a suggestion for the server',inline=False)
+		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
 		await client.send_message(message.channel,embed=embed)
 	
 	#Fun Commands
@@ -300,6 +421,7 @@ async def on_message(message):
 		embed.add_field(name='poll! item1-without-spaces item2-without-spaces',value='Creates a 2 item poll', inline=False)
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
 		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
+		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		
 	#MOD Commands Help
@@ -497,18 +619,23 @@ async def on_message(message):
 			joindate = message.author.joined_at
 			roles = message.author.roles
 			level = users[message.author.id]['level']
+			experience = users[message.author.id]['experience']
+			nextexp = (level+1)**4
 			string = []
 			for item in roles:
 				if item.name!='@everyone':
 					string.append(item.mention)
+			if len(string) == 0:
+				string = '-'
 			string = list(reversed(string))
 			string='  '.join(string)
 			embed = discord.Embed(title='PROFILE',description=server.name,colour=discord.Colour.teal())
 			embed.set_thumbnail(url=pfp)
-			embed.add_field(name='Name:',value=name,inline='True')
-			embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='True')
-			embed.add_field(name='Level:',value=level,inline='False')
-			embed.add_field(name='Roles:',value=string,inline='False')
+			embed.add_field(name='Name:',value=name,inline=True)
+			embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline=True)
+			embed.add_field(name='Level:',value=level,inline=True)
+			embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
+			embed.add_field(name='Roles:',value=string,inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
 			server=client.get_server(os.getenv('SERVER_ID'))
@@ -519,18 +646,23 @@ async def on_message(message):
 					joindate = mem.joined_at
 					roles = mem.roles
 					level = users[mem.id]['level']
+					experience = users[mem.id]['experience']
+					nextexp = (level+1)**4
 					string = []
 					for item in roles:
 						if item.name!='@everyone':
 							string.append(item.mention)
+					if len(string) == 0:
+						string = '-'
 					string = list(reversed(string))
 					string='  '.join(string)
 					embed = discord.Embed(title='PROFILE',description=server.name,colour=discord.Colour.teal())
 					embed.set_thumbnail(url=pfp)
-					embed.add_field(name='Name:',value=name,inline='True')
-					embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline='True')
-					embed.add_field(name='Level:',value=level,inline='False')
-					embed.add_field(name='Roles:',value=string,inline='False')
+					embed.add_field(name='Name:',value=name,inline=True)
+					embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline=True)
+					embed.add_field(name='Level:',value=level,inline=True)
+					embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
+					embed.add_field(name='Roles:',value=string,inline=False)
 					await client.send_message(message.channel,embed=embed)
 					break
 					
@@ -624,9 +756,8 @@ async def on_message(message):
 	if message.content.upper().startswith('STACKOV!'):
 		args = ' '.join(message.content.split(' ')[1:])
 		query = search('Stackoverflow ' + args)
-		embed = discord.Embed(title='StackOverflow Search',description='Results for the query',colour=discord.Color.orange())
-		print('Stackoverflow ' + args)
-		for item in query:
+		embed = discord.Embed(title='StackOverflow Search', description='Results for the query',colour=discord.Color.orange())
+		for item in query[:5]:
 			embed.add_field(name='-->',value=item,inline=False)
 		await client.send_message(message.channel,embed=embed)
 	
@@ -635,6 +766,7 @@ async def on_message(message):
 	if message.content.upper().startswith('EMBED!'):
 		args = ' '.join(message.content.split(' ')[1:])
 		embed = discord.Embed(title='Embedded by {}'.format(message.author.name),description=args,colour = discord.Color.dark_orange())
+		await client.delete_message(message)
 		await client.send_message(message.channel,embed=embed)
 	
 	#Trivia
