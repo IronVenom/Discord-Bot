@@ -823,7 +823,7 @@ async def on_message(message):
 	# Tech News
 
 	if message.content.upper().startswith('TECHNEWS!'):
-		if message.author.id == "467318598839304206":
+		if message.author.id == os.getenv('OWNER'):
 			th1=newsapi.get_top_headlines(q='technology',sources='ars-technica',language='en')
 			th2=newsapi.get_top_headlines(q='technology',sources='engadget',language='en')
 			th3=newsapi.get_top_headlines(q='technology',sources='hacker-news',language='en')
