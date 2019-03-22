@@ -141,7 +141,7 @@ async def on_message(message):
 		mems = server.members
 		lis = []
 		for j in mems:
-			if j.id in users:
+			if j.id in users and j.id != os.getenv('BOT'):
 				lis.append([j,j.id])
 		for i in lis:
 			i.append(users[i[1]]['experience'])
@@ -897,7 +897,7 @@ async def level_up(users, user, channel) :
 	lvl_start = users[user.id]['level']
 	lvl_end = int(experience**(1/4))
 
-	if lvl_start < lvl_end:
+	if lvl_start < lvl_end and user.id != os.getenv('BOT'):
 		embed = discord.Embed(title = 'Congrats!',description='{} has leveled up to level {}'.format(user.mention,lvl_end),color=discord.Color.blue())
 		await client.send_message(channel,embed = embed)
 		users[user.id]['level'] = lvl_end
