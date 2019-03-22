@@ -432,6 +432,7 @@ async def on_message(message):
 			embed.add_field(name='purge! number of messages',value='Purges through a given number of messages.', inline=False)
 			embed.add_field(name='kick! user',value='Kicks the mentioned user from the server.', inline=False)
 			embed.add_field(name='ban! user',value='Bans the mentioned user from the server.', inline=False)
+			embed.add_field(name='technews!',value='Release tech news.', inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
 			embed=discord.Embed(title='Warning',description='{} You are not allowed to use this command!'.format(message.author.mention),colour=discord.Colour.red())
@@ -819,6 +820,62 @@ async def on_message(message):
 		embed = discord.Embed(title="Result of the battle",description=random.choice(wlt),color=discord.Color.green())
 		await client.send_message(message.channel,embed=embed)
 	
+	# Tech News
+
+	if message.content.upper().startswith('TECHNEWS!'):
+		if message.author.id == "467318598839304206":
+			th1=newsapi.get_top_headlines(q='technology',sources='ars-technica',language='en')
+			th2=newsapi.get_top_headlines(q='technology',sources='engadget',language='en')
+			th3=newsapi.get_top_headlines(q='technology',sources='hacker-news',language='en')
+			th4=newsapi.get_top_headlines(q='technology',sources='recode',language='en')
+			th5=newsapi.get_top_headlines(q='technology',sources='techcrunch',language='en')
+			th6=newsapi.get_top_headlines(q='technology',sources='techradar',language='en')
+			th12=newsapi.get_top_headlines(q='tech',sources='ars-technica',language='en')
+			th22=newsapi.get_top_headlines(q='tech',sources='engadget',language='en')
+			th32=newsapi.get_top_headlines(q='tech',sources='hacker-news',language='en')
+			th42=newsapi.get_top_headlines(q='tech',sources='recode',language='en')
+			th52=newsapi.get_top_headlines(q='tech',sources='techcrunch',language='en')
+			th62=newsapi.get_top_headlines(q='tech',sources='techradar',language='en')
+			s=[]
+			if (len(th1['articles'])!=0):
+				s.append(th1['articles'][0]['url'])
+			if (len(th2['articles'])!=0):
+				s.append(th2['articles'][0]['url'])
+			if (len(th3['articles'])!=0):
+				s.append(th3['articles'][0]['url'])
+			if (len(th4['articles'])!=0):
+				s.append(th4['articles'][0]['url'])
+			if (len(th5['articles'])!=0):
+				s.append(th5['articles'][0]['url'])
+			if (len(th6['articles'])!=0):
+				s.append(th6['articles'][0]['url'])
+			if (len(th12['articles'])!=0):
+				s.append(th12['articles'][0]['url'])
+			if (len(th22['articles'])!=0):
+				s.append(th22['articles'][0]['url'])
+			if (len(th32['articles'])!=0):
+				s.append(th32['articles'][0]['url'])
+			if (len(th42['articles'])!=0):
+				s.append(th42['articles'][0]['url'])
+			if (len(th52['articles'])!=0):
+				s.append(th52['articles'][0]['url'])
+			if (len(th62['articles'])!=0):
+				s.append(th62['articles'][0]['url'])
+			headlines=list(set(s))
+			embed=discord.Embed(title='Tech News',description='The latest Tech News of the day.',colour=discord.Colour.teal())
+			embed.set_footer(text='Powered by NewsAPI')
+			technews = client.get_channel(os.getenv('TECH_NEWS_ID'))
+			if(len(headlines)!=0):
+				for i in range(1,len(headlines)+1):
+					news_number='News-{}'.format(i)
+					embed.add_field(name=news_number,value=headlines[i-1],inline=False)
+			else:
+				embed.add_field(name='Sorry!',value='No news available right now',inline=False)
+			await client.send_message(technews, embed=embed)
+		else:
+			embed = discord.Embed(title = 'WARNING',description='You are not allowed to use this command!',color = discord.Color.red())
+			await client.send_message(message.channel, embed=embed)
+	
 # EXPERIENCE SYSTEM
 
 async def update_data(users, user):
@@ -923,60 +980,60 @@ async def on_member_remove(member):
 	msg='Farewell {}! Best of luck for the future!'.format(userid)
 	await client.send_message(channel,msg)
 
-#Tech News.
+# #Tech News.
 
-async def send_news():
-	await client.wait_until_ready()
-	while not client.is_closed:
-		th1=newsapi.get_top_headlines(q='technology',sources='ars-technica',language='en')
-		th2=newsapi.get_top_headlines(q='technology',sources='engadget',language='en')
-		th3=newsapi.get_top_headlines(q='technology',sources='hacker-news',language='en')
-		th4=newsapi.get_top_headlines(q='technology',sources='recode',language='en')
-		th5=newsapi.get_top_headlines(q='technology',sources='techcrunch',language='en')
-		th6=newsapi.get_top_headlines(q='technology',sources='techradar',language='en')
-		th12=newsapi.get_top_headlines(q='tech',sources='ars-technica',language='en')
-		th22=newsapi.get_top_headlines(q='tech',sources='engadget',language='en')
-		th32=newsapi.get_top_headlines(q='tech',sources='hacker-news',language='en')
-		th42=newsapi.get_top_headlines(q='tech',sources='recode',language='en')
-		th52=newsapi.get_top_headlines(q='tech',sources='techcrunch',language='en')
-		th62=newsapi.get_top_headlines(q='tech',sources='techradar',language='en')
-		s=[]
-		if (len(th1['articles'])!=0):
-			s.append(th1['articles'][0]['url'])
-		if (len(th2['articles'])!=0):
-			s.append(th2['articles'][0]['url'])
-		if (len(th3['articles'])!=0):
-			s.append(th3['articles'][0]['url'])
-		if (len(th4['articles'])!=0):
-			s.append(th4['articles'][0]['url'])
-		if (len(th5['articles'])!=0):
-			s.append(th5['articles'][0]['url'])
-		if (len(th6['articles'])!=0):
-			s.append(th6['articles'][0]['url'])
-		if (len(th12['articles'])!=0):
-			s.append(th12['articles'][0]['url'])
-		if (len(th22['articles'])!=0):
-			s.append(th22['articles'][0]['url'])
-		if (len(th32['articles'])!=0):
-			s.append(th32['articles'][0]['url'])
-		if (len(th42['articles'])!=0):
-			s.append(th42['articles'][0]['url'])
-		if (len(th52['articles'])!=0):
-			s.append(th52['articles'][0]['url'])
-		if (len(th62['articles'])!=0):
-			s.append(th62['articles'][0]['url'])
-		headlines=list(set(s))
-		embed=discord.Embed(title='Tech News',description='Tech News of the Week, brought to you by Sparky.',colour=discord.Colour.teal())
-		embed.set_footer(text='Powered by NewsAPI')
-		technews = client.get_channel(os.getenv('TECH_NEWS_ID'))
-		if(len(headlines)!=0):
-			for i in range(1,len(headlines)+1):
-				news_number='News-{}'.format(i)
-				embed.add_field(name=news_number,value=headlines[i-1],inline=False)
-		else:
-			embed.add_field(name='Sorry!',value='No news available right now',inline=False)
-		await client.send_message(technews, embed=embed)
-		await asyncio.sleep(172800)
+# async def send_news():
+# 	await client.wait_until_ready()
+# 	while not client.is_closed:
+# 		th1=newsapi.get_top_headlines(q='technology',sources='ars-technica',language='en')
+# 		th2=newsapi.get_top_headlines(q='technology',sources='engadget',language='en')
+# 		th3=newsapi.get_top_headlines(q='technology',sources='hacker-news',language='en')
+# 		th4=newsapi.get_top_headlines(q='technology',sources='recode',language='en')
+# 		th5=newsapi.get_top_headlines(q='technology',sources='techcrunch',language='en')
+# 		th6=newsapi.get_top_headlines(q='technology',sources='techradar',language='en')
+# 		th12=newsapi.get_top_headlines(q='tech',sources='ars-technica',language='en')
+# 		th22=newsapi.get_top_headlines(q='tech',sources='engadget',language='en')
+# 		th32=newsapi.get_top_headlines(q='tech',sources='hacker-news',language='en')
+# 		th42=newsapi.get_top_headlines(q='tech',sources='recode',language='en')
+# 		th52=newsapi.get_top_headlines(q='tech',sources='techcrunch',language='en')
+# 		th62=newsapi.get_top_headlines(q='tech',sources='techradar',language='en')
+# 		s=[]
+# 		if (len(th1['articles'])!=0):
+# 			s.append(th1['articles'][0]['url'])
+# 		if (len(th2['articles'])!=0):
+# 			s.append(th2['articles'][0]['url'])
+# 		if (len(th3['articles'])!=0):
+# 			s.append(th3['articles'][0]['url'])
+# 		if (len(th4['articles'])!=0):
+# 			s.append(th4['articles'][0]['url'])
+# 		if (len(th5['articles'])!=0):
+# 			s.append(th5['articles'][0]['url'])
+# 		if (len(th6['articles'])!=0):
+# 			s.append(th6['articles'][0]['url'])
+# 		if (len(th12['articles'])!=0):
+# 			s.append(th12['articles'][0]['url'])
+# 		if (len(th22['articles'])!=0):
+# 			s.append(th22['articles'][0]['url'])
+# 		if (len(th32['articles'])!=0):
+# 			s.append(th32['articles'][0]['url'])
+# 		if (len(th42['articles'])!=0):
+# 			s.append(th42['articles'][0]['url'])
+# 		if (len(th52['articles'])!=0):
+# 			s.append(th52['articles'][0]['url'])
+# 		if (len(th62['articles'])!=0):
+# 			s.append(th62['articles'][0]['url'])
+# 		headlines=list(set(s))
+# 		embed=discord.Embed(title='Tech News',description='Tech News of the Week, brought to you by Sparky.',colour=discord.Colour.teal())
+# 		embed.set_footer(text='Powered by NewsAPI')
+# 		technews = client.get_channel(os.getenv('TECH_NEWS_ID'))
+# 		if(len(headlines)!=0):
+# 			for i in range(1,len(headlines)+1):
+# 				news_number='News-{}'.format(i)
+# 				embed.add_field(name=news_number,value=headlines[i-1],inline=False)
+# 		else:
+# 			embed.add_field(name='Sorry!',value='No news available right now',inline=False)
+# 		await client.send_message(technews, embed=embed)
+# 		await asyncio.sleep(172800)
 
-client.loop.create_task(send_news())
+# client.loop.create_task(send_news())
 client.run(os.getenv('TOKEN'))
