@@ -128,9 +128,11 @@ async def on_message(message):
 		embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
 		embed.add_field(name='Suggestion',value=args,inline= False)
 		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
-		embed =  discord.Embed(title = "Suggestion",description = "Your suggestion has been recorded, please check {} for follow up.".format(suggestion_channel.mention),color = discord.Color.blue())
-		await client.delete_message(message)
 		await client.send_message(suggestion_channel,embed = embed)
+		embed =  discord.Embed(title = "Suggestion",description = "Your suggestion has been recorded, please check {} for follow up.".format(suggestion_channel.mention),color = discord.Color.blue())
+		await client.send_message(message.channel,embed = embed)
+		await client.delete_message(message)
+		
 		
 	# Leaderboard command
 
