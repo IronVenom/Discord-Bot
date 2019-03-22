@@ -961,7 +961,8 @@ async def on_member_join(member):
 	channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
 	channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
 	language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
-	msg='Welcome to Sparks and Glory {}! Please look at {} before proceeding, and assign yourself a language role in {}! Have fun!'.format(userid,channel_rules.mention,language_role_channel.mention)
+	topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+	msg='Welcome to Sparks and Glory {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}! Have fun!'.format(userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
 	await client.send_message(channel,msg)
 	
 	# Creating an user account for exp system.
