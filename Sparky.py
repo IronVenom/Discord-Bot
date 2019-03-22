@@ -142,8 +142,9 @@ async def on_message(message):
 		lis = []
 		for j in mems:
 			lis.append([j,j.id])
-		for i in lis and i[1] != os.getenv('BOT'):
-			i.append(users[i[1]]['experience'])
+		for i in lis:
+			if i[1] != os.getenv('BOT'):
+				i.append(users[i[1]]['experience'])
 		lead = [[i[0],i[2]] for i in lis]
 		lead.sort(key=operator.itemgetter(1),reverse = True)
 		embed = discord.Embed(title = 'Leaderboard',description='Monthly Experience System',color = discord.Color.dark_blue())
