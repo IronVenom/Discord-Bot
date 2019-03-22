@@ -127,9 +127,9 @@ async def on_message(message):
 		embed = discord.Embed(title='Iron Man\'s Dropbox',description='Suggestion created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
 		embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
 		embed.add_field(name='Suggestion',value=args,inline= False)
+		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
 		embed =  discord.Embed(title = "Suggestion",description = "Your suggestion has been recorded, please check {} for follow up.".format(suggestion_channel.mention),color = discord.Color.blue())
 		await client.delete_message(message)
-		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
 		await client.send_message(suggestion_channel,embed = embed)
 		
 	# Leaderboard command
@@ -403,7 +403,7 @@ async def on_message(message):
 		embed.add_field(name='profile!',value='Check out your profile card.',inline=False)
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
 		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
-		embed.add_field(name='sugest! suggestion',value='Create a suggestion for the server',inline=False)
+		embed.add_field(name='suggest! suggestion',value='Create a suggestion for the server',inline=False)
 		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
 		await client.send_message(message.channel,embed=embed)
 	
