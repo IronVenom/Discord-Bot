@@ -141,7 +141,8 @@ async def on_message(message):
 		mems = server.members
 		lis = []
 		for j in mems:
-			lis.append([j,j.id])
+			if j.id in users:
+				lis.append([j,j.id])
 		for i in lis:
 			i.append(users[i[1]]['experience'])
 		lead = [[i[0],i[2]] for i in lis]
@@ -158,6 +159,7 @@ async def on_message(message):
 				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
 			embed.add_field(name = 'TOP {} Members'.format(len(lead)), value =msg,inline = False)
 		await client.send_message(message.channel,embed = embed)
+
 
 	# Google Search
 
