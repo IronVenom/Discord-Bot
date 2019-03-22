@@ -102,7 +102,7 @@ async def on_message(message):
 	#TOPIC Based Roles Help
 
 	if message.content.upper().startswith('TPHELP!'):
-		embed = discord.Embed(title='Language Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
+		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
 		embed.add_field(name='TOPICROLE! name of role from above 4',value='Adds the role',inline=False)
 		embed.add_field(name='TOPICROLEREMOVE! removes role from above 4',value='Removes the role',inline=False)
 		await client.send_message(message.channel,embed=embed)
