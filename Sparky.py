@@ -111,12 +111,17 @@ async def on_message(message):
 	# Urban Dictionary
 	
 	if message.content.upper().startswith('URBAN!'):
+		server=client.get_server(os.getenv('SERVER_ID'))
+		dab = None 
+		for i in server.emojis:
+			if i.name == 'dab':
+				dab = i
 		args = ' '.join(message.content.split(' ')[1:])
 		query = urbandict.define(args)
 		example = query[0]['example']
 		definition = query[0]['def']
-		embed = discord.Embed(title = 'Urban Dictionary',description = ':dab:',color = discord.Color.dark_orange())
-		embed.add_field(name = 'Word',value = query,inline = False)
+		embed = discord.Embed(title = 'Urban Dictionary',description ="{}".format(dab),color = discord.Color.dark_orange())
+		embed.add_field(name = 'Word',value = args ,inline = False)
 		embed.add_field(name = 'Meaning',value = definition,inline = False)
 		embed.add_field(name = 'Example',value = example,inline = False)
 		await client.send_message(message.channel, embed = embed)
