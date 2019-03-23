@@ -103,8 +103,8 @@ async def on_message(message):
 
 	if message.content.upper().startswith('TPHELP!'):
 		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
-		embed.add_field(name='TOPICROLE! name of role from above 4',value='Adds the role',inline=False)
-		embed.add_field(name='TOPICROLEREMOVE! removes role from above 4',value='Removes the role',inline=False)
+		embed.add_field(name='topicrole! name of role from above 4',value='Adds the role',inline=False)
+		embed.add_field(name='topicroleremove! removes role from above 4',value='Removes the role',inline=False)
 		await client.send_message(message.channel,embed=embed)
 
 		
@@ -555,8 +555,8 @@ async def on_message(message):
 
 	if message.content.upper().startswith('LRHELP!'):
 		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python',colour=discord.Colour.purple())
-		embed.add_field(name='LANGROLE! name of role from above 4',value='Adds the role',inline=False)
-		embed.add_field(name='LANGROLEREMOVE! removes role from above 4',value='Removes the role',inline=False)
+		embed.add_field(name='langrole! name of role from above 4',value='Adds the role',inline=False)
+		embed.add_field(name='langroleremove! removes role from above 4',value='Removes the role',inline=False)
 		await client.send_message(message.channel,embed=embed)
 
 	#Add Language Based Roles
@@ -877,9 +877,11 @@ async def on_message(message):
 			else:
 				embed.add_field(name='Sorry!',value='No news available right now',inline=False)
 			await client.send_message(technews, embed=embed)
+			await client.delete_message(message)
 		else:
 			embed = discord.Embed(title = 'WARNING',description='You are not allowed to use this command!',color = discord.Color.red())
 			await client.send_message(message.channel, embed=embed)
+			await client.delete_message(message)
 	
 # EXPERIENCE SYSTEM
 
@@ -959,12 +961,13 @@ async def level_up(users, user, channel) :
 
 @client.event
 async def on_member_join(member):
+	server=client.get_server(os.getenv('SERVER_ID'))
 	userid=member.mention
 	channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
 	channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
 	language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
 	topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
-	msg='Welcome to Sparks and Glory {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}! Have fun!'.format(userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
+	msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
 	await client.send_message(channel,msg)
 	
 	# Creating an user account for exp system.
