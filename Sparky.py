@@ -236,7 +236,7 @@ async def on_message(message):
 		icon=server.icon_url
 		embed=discord.Embed(title=server.name,description='SERVER INFO',colour=discord.Colour.teal())
 		embed.set_thumbnail(url=icon)
-		embed.add_field(name='Member count:',value='Humans : {}\nBots : 4'.format(people_count-4),inline=False)
+		embed.add_field(name='Member count:',value='Humans : {}\nBots : 1\nBump Bots : 4'.format(people_count-5),inline=False)
 		embed.add_field(name='Time of Origin:',value='{}-{}-{}'.format(time_of_creation.day, time_of_creation.month, time_of_creation.year),inline=False)
 		embed.add_field(name='Owner:',value=owner_name,inline=False)
 		await client.send_message(message.channel,embed=embed)
