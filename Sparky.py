@@ -21,7 +21,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import operator
 import json
-import urbandictionary as ud
+import urbandict
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -112,12 +112,15 @@ async def on_message(message):
 	
 	if message.content.upper().startswith('URBAN!'):
 		args = ' '.join(message.content.split(' ')[1:])
-		defs = ud.define(args)
-		embed = discord.Embed(title = 'Urban Dictionary',description='Hit or Miss',color = discord.Color.dark_orange())
-		for d in defs[0:3]:
-			embed.add_field(name = '-->', value = d.definition, inline = False)
-		await client.send_message(message.channel,embed = embed)
-
+		query = urbandict.define(args)
+		example = query[0]['example']
+		definition = query[0]['def']
+		embed = discord.Embed(title = 'Urban Dictionary',description = ':dab:',color = discord.Color.dark_orange())
+		embed.add_field(name = 'Word',value = query,inline = False)
+		embed.add_field(name = 'Meaning',value = definition,inline = False)
+		embed.add_field(name = 'Example',value = example,inline = False)
+		await client.send_message(message.channel, embed = embed)
+		
 	# Suggest
 		
 	if message.content.upper().startswith('SUGGEST!'):
