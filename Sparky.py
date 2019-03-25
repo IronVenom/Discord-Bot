@@ -50,6 +50,16 @@ async def on_message(message):
 	with open('users.json','w') as f:
 		json.dump(users, f)
 	
+	# Warn a Member
+	
+	if message.content.upper().startswith('WARN!'):
+		args = message.content.split(' ')[2:]
+		person = message.content.split(' ')[1]
+		msg = ' '.join(args)
+		embed = discord.Embed(title = 'Warning',description=' {} you have been warned for {} .'.format(person,msg),color = discord.Color.red())
+		await client.send_message(message.channel,embed = embed)
+		await client.delete_message(message)
+	
 	#Add Topic Based Roles
 
 	if message.content.upper().startswith('TOPICROLE!'):
@@ -446,6 +456,7 @@ async def on_message(message):
 			embed.add_field(name='kick! user',value='Kicks the mentioned user from the server.', inline=False)
 			embed.add_field(name='ban! user',value='Bans the mentioned user from the server.', inline=False)
 			embed.add_field(name='technews!',value='Release tech news.', inline=False)
+			embed.add_field(name='warn! mention_member reason',value='Warns a member.', inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
 			embed=discord.Embed(title='Warning',description='{} You are not allowed to use this command!'.format(message.author.mention),colour=discord.Colour.red())
