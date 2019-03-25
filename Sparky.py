@@ -53,6 +53,7 @@ async def on_message(message):
 	# Warn a Member
 	
 	if message.content.upper().startswith('WARN!'):
+		flag=False
 		if message.author.server_permissions.kick_members == True and message.author.server_permissions.ban_members ==  True:
 			flag=True
 		if flag == True:
@@ -62,9 +63,12 @@ async def on_message(message):
 			embed = discord.Embed(title = 'Warning',description=' {} you have been warned for {} .'.format(person,msg),color = discord.Color.red())
 			await client.send_message(message.channel,embed = embed)
 			await client.delete_message(message)
+
 		else:
 			embed=discord.Embed(title='Warning',description='{} You are not allowed to use this command!'.format(message.author.mention),colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
+
+
 
 		
 	
