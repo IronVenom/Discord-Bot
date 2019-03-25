@@ -875,7 +875,7 @@ async def on_message(message):
 			if (len(th62['articles'])!=0):
 				s.append(th62['articles'][0]['url'])
 			headlines=list(set(s))
-			embed=discord.Embed(title='Tech News',description='The latest Tech News of the day.',colour=discord.Colour.teal())
+			embed=discord.Embed(title='Tech News',description='Tech News of the Week.',colour=discord.Colour.teal())
 			embed.set_footer(text='Powered by NewsAPI')
 			technews = client.get_channel(os.getenv('TECH_NEWS_ID'))
 			if(len(headlines)!=0):
