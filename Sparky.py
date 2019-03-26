@@ -38,17 +38,17 @@ async def on_ready():
 @client.event
 async def on_message(message):
 	
-	# Experience System
+# 	# Experience System
 
-	with open('users.json','r') as f:
-		users = json.load(f)
+# 	with open('users.json','r') as f:
+# 		users = json.load(f)
 
-	await update_data(users,message.author)
-	await add_experience(users, message.author, 5)
-	await level_up(users, message.author, message.channel)
+# 	await update_data(users,message.author)
+# 	await add_experience(users, message.author, 5)
+# 	await level_up(users, message.author, message.channel)
 
-	with open('users.json','w') as f:
-		json.dump(users, f)
+# 	with open('users.json','w') as f:
+# 		json.dump(users, f)
 	
 	# Warn a Member
 	
@@ -164,31 +164,31 @@ async def on_message(message):
 		await client.delete_message(message)
 		
 		
-	# Leaderboard command
+# 	# Leaderboard command
 
-	if message.content.upper().startswith('LEADERBOARD!'):
-		server=client.get_server(os.getenv('SERVER_ID'))
-		mems = server.members
-		lis = []
-		for j in mems:
-			if j.id in users and j.id != os.getenv('BOT'):
-				lis.append([j,j.id])
-		for i in lis:
-			i.append(users[i[1]]['experience'])
-		lead = [[i[0],i[2]] for i in lis]
-		lead.sort(key=operator.itemgetter(1),reverse = True)
-		embed = discord.Embed(title = 'Leaderboard',description='Monthly Experience System',color = discord.Color.dark_blue())
-		if len(lead)>5:
-			msg = '\n'
-			for j,i in enumerate(lead[:5],1):
-				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
-			embed.add_field(name = 'TOP 5 Members', value =msg,inline = False)
-		else:
-			msg = '\n'
-			for j,i in enumerate(lead,1):
-				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
-			embed.add_field(name = 'TOP {} Members'.format(len(lead)), value =msg,inline = False)
-		await client.send_message(message.channel,embed = embed)
+# 	if message.content.upper().startswith('LEADERBOARD!'):
+# 		server=client.get_server(os.getenv('SERVER_ID'))
+# 		mems = server.members
+# 		lis = []
+# 		for j in mems:
+# 			if j.id in users and j.id != os.getenv('BOT'):
+# 				lis.append([j,j.id])
+# 		for i in lis:
+# 			i.append(users[i[1]]['experience'])
+# 		lead = [[i[0],i[2]] for i in lis]
+# 		lead.sort(key=operator.itemgetter(1),reverse = True)
+# 		embed = discord.Embed(title = 'Leaderboard',description='Monthly Experience System',color = discord.Color.dark_blue())
+# 		if len(lead)>5:
+# 			msg = '\n'
+# 			for j,i in enumerate(lead[:5],1):
+# 				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
+# 			embed.add_field(name = 'TOP 5 Members', value =msg,inline = False)
+# 		else:
+# 			msg = '\n'
+# 			for j,i in enumerate(lead,1):
+# 				msg = msg + '{}.)  {}  :  {}'.format(j,i[0].mention,i[1]) + '\n'
+# 			embed.add_field(name = 'TOP {} Members'.format(len(lead)), value =msg,inline = False)
+# 		await client.send_message(message.channel,embed = embed)
 
 
 	# Google Search
@@ -438,7 +438,7 @@ async def on_message(message):
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
 		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
 		embed.add_field(name='suggest! suggestion',value='Create a suggestion for the server',inline=False)
-		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
+# 		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
 		await client.send_message(message.channel,embed=embed)
 	
 	#Fun Commands
@@ -655,9 +655,9 @@ async def on_message(message):
 			pfp = message.author.avatar_url
 			joindate = message.author.joined_at
 			roles = message.author.roles
-			level = users[message.author.id]['level']
-			experience = users[message.author.id]['experience']
-			nextexp = (level+1)**4
+# 			level = users[message.author.id]['level']
+# 			experience = users[message.author.id]['experience']
+# 			nextexp = (level+1)**4
 			string = []
 			for item in roles:
 				if item.name!='@everyone':
@@ -670,8 +670,8 @@ async def on_message(message):
 			embed.set_thumbnail(url=pfp)
 			embed.add_field(name='Name:',value=name,inline=True)
 			embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline=True)
-			embed.add_field(name='Level:',value=level,inline=True)
-			embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
+# 			embed.add_field(name='Level:',value=level,inline=True)
+# 			embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
 			embed.add_field(name='Roles:',value=string,inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
@@ -682,9 +682,9 @@ async def on_message(message):
 					pfp = mem.avatar_url
 					joindate = mem.joined_at
 					roles = mem.roles
-					level = users[mem.id]['level']
-					experience = users[mem.id]['experience']
-					nextexp = (level+1)**4
+# 					level = users[mem.id]['level']
+# 					experience = users[mem.id]['experience']
+# 					nextexp = (level+1)**4
 					string = []
 					for item in roles:
 						if item.name!='@everyone':
@@ -697,8 +697,8 @@ async def on_message(message):
 					embed.set_thumbnail(url=pfp)
 					embed.add_field(name='Name:',value=name,inline=True)
 					embed.add_field(name='Joined the server on:',value='{}-{}-{}'.format(joindate.day,joindate.month,joindate.year),inline=True)
-					embed.add_field(name='Level:',value=level,inline=True)
-					embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
+# 					embed.add_field(name='Level:',value=level,inline=True)
+# 					embed.add_field(name='Experience:',value='[**{}/{}**]'.format(experience,nextexp),inline=True)
 					embed.add_field(name='Roles:',value=string,inline=False)
 					await client.send_message(message.channel,embed=embed)
 					break
@@ -914,78 +914,78 @@ async def on_message(message):
 			await client.send_message(message.channel, embed=embed)
 			await client.delete_message(message)
 	
-# EXPERIENCE SYSTEM
+# # EXPERIENCE SYSTEM
 
-async def update_data(users, user):
-	if not user.id in users:
-		users[user.id]={}
-		users[user.id]['experience'] = 0
-		users[user.id]['level'] = 1
+# async def update_data(users, user):
+# 	if not user.id in users:
+# 		users[user.id]={}
+# 		users[user.id]['experience'] = 0
+# 		users[user.id]['level'] = 1
 
-async def add_experience(users,user,exp):
-	users[user.id]['experience'] += exp 
+# async def add_experience(users,user,exp):
+# 	users[user.id]['experience'] += exp 
 
-async def level_up(users, user, channel) :
-	experience = users[user.id]['experience']
-	lvl_start = users[user.id]['level']
-	lvl_end = int(experience**(1/4))
+# async def level_up(users, user, channel) :
+# 	experience = users[user.id]['experience']
+# 	lvl_start = users[user.id]['level']
+# 	lvl_end = int(experience**(1/4))
 
-	if lvl_start < lvl_end and user.id != os.getenv('BOT'):
-		embed = discord.Embed(title = 'Congrats!',description='{} has leveled up to level {}'.format(user.mention,lvl_end),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
-		users[user.id]['level'] = lvl_end
+# 	if lvl_start < lvl_end and user.id != os.getenv('BOT'):
+# 		embed = discord.Embed(title = 'Congrats!',description='{} has leveled up to level {}'.format(user.mention,lvl_end),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
+# 		users[user.id]['level'] = lvl_end
 
-	role1 = "Regular"
-	role2 = "Super Regular"
-	role3 = "Super Duper Regular"
-	role4 = "Amazingly Regular"
-	role5 = "Super Duper Amazingly Regular"
-	role6 = "Omega Member"
+# 	role1 = "Regular"
+# 	role2 = "Super Regular"
+# 	role3 = "Super Duper Regular"
+# 	role4 = "Amazingly Regular"
+# 	role5 = "Super Duper Amazingly Regular"
+# 	role6 = "Omega Member"
  
-	server=client.get_server(os.getenv('SERVER_ID'))
-	for role in server.roles:
-		if role.name == role1:
-			role1 = role
-		if role.name == role2:
-			role2 = role
-		if role.name == role3:
-			role3 = role
-		if role.name == role4:
-			role4 = role
-		if role.name == role5:
-			role5 = role
-		if role.name == role6:
-			role6 = role
+# 	server=client.get_server(os.getenv('SERVER_ID'))
+# 	for role in server.roles:
+# 		if role.name == role1:
+# 			role1 = role
+# 		if role.name == role2:
+# 			role2 = role
+# 		if role.name == role3:
+# 			role3 = role
+# 		if role.name == role4:
+# 			role4 = role
+# 		if role.name == role5:
+# 			role5 = role
+# 		if role.name == role6:
+# 			role6 = role
 
-	if users[user.id]['level'] == 10:
-		await client.add_roles(user,role1)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role1.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 10:
+# 		await client.add_roles(user,role1)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role1.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 
-	if users[user.id]['level'] == 20:
-		await client.add_roles(user,role2)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role2.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 20:
+# 		await client.add_roles(user,role2)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role2.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 
-	if users[user.id]['level'] == 40:
-		await client.add_roles(user,role3)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role3.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 40:
+# 		await client.add_roles(user,role3)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role3.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 
-	if users[user.id]['level'] == 50:
-		await client.add_roles(user,role4)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role4.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 50:
+# 		await client.add_roles(user,role4)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role4.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 
-	if users[user.id]['level'] == 80:
-		await client.add_roles(user,role5)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role5.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 80:
+# 		await client.add_roles(user,role5)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role5.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 
-	if users[user.id]['level'] == 100:
-		await client.add_roles(user,role6)
-		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role6.mention),color=discord.Color.blue())
-		await client.send_message(channel,embed = embed)
+# 	if users[user.id]['level'] == 100:
+# 		await client.add_roles(user,role6)
+# 		embed = discord.Embed(title = 'Congrats!',description='{}, You have {} role now!'.format(user.mention,role6.mention),color=discord.Color.blue())
+# 		await client.send_message(channel,embed = embed)
 	
 		
 #Introduction of a new user. Note that in asyncio the ids are strings.	
@@ -1001,15 +1001,15 @@ async def on_member_join(member):
 	msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
 	await client.send_message(channel,msg)
 	
-	# Creating an user account for exp system.
+# 	# Creating an user account for exp system.
 
-	with open('users.json','r') as f:
-		users = json.load(f)
+# 	with open('users.json','r') as f:
+# 		users = json.load(f)
 
-	await update_data(users,member)
+# 	await update_data(users,member)
 
-	with open('users.json','w') as f:
-		json.dump(users, f)
+# 	with open('users.json','w') as f:
+# 		json.dump(users, f)
 
 #Bidding goodbye when a member leaves.
 
