@@ -445,7 +445,7 @@ async def on_message(message):
 
 	if message.content.upper().startswith('FUNHELP!'):
 		embed=discord.Embed(title='Fun Commands',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.magenta())
-		embed.add_field(name='wiki!',value='Gives brief summary from Wikipedia of the queried item',inline=False)
+		embed.add_field(name='wiki! query',value='Gives brief summary from Wikipedia of the queried item',inline=False)
 		embed.add_field(name='coin! type heads or tails',value='Make Sparky toss a coin and see if you win',inline=False)
 		embed.add_field(name='slot!',value='Test your luck on Sparky\'s slot machine!',inline=False)
 		embed.add_field(name='joke!',value='Cheeky and nerdy Chuck Norris jokes',inline=False)
