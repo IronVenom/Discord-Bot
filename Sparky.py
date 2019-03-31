@@ -1076,4 +1076,16 @@ async def on_member_remove(member):
 # 		await asyncio.sleep(172800)
 
 # client.loop.create_task(send_news())
+
+#Bumping Server 
+
+async def bump_server():
+	await client.wait_until_ready()
+	while not client.is_closed:
+		channel=client.get_channel(os.getenv('BUMP_ID'))
+		message = 'd! bump'
+		await client.send_message(channel,message)
+		await asyncio.sleep(10800)
+		
+client.loop.create_task(bump_server())
 client.run(os.getenv('TOKEN'))
