@@ -1083,7 +1083,7 @@ async def bump_server():
 	await client.wait_until_ready()
 	while not client.is_closed:
 		channel=client.get_channel(os.getenv('BUMP_ID'))
-		message = 'd! bump'
+		message = '!d bump'
 		await client.send_message(channel,message)
 		await asyncio.sleep(10800)
 		
