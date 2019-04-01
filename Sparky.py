@@ -228,11 +228,19 @@ async def on_message(message):
 		movie=ia.search_movie(moviename)
 		movie1=movie[0]
 		movieid=ia.get_imdbID(movie1)
-		movieinfo=ia.get_movie(movieid)
+		movieinfo=ia.get_movie(movieid,info = ['critic reviews','vote details','plot'])
 		plot=movieinfo['plot'][0]
-		embed=discord.Embed(title='PLOT SUMMARY',description='',colour=discord.Colour.teal())
-		embed.add_field(name=moviename,value=plot,inline=False)
-		await client.send_message(message.channel,embed=embed)
+		metascore = movieinfo['metascore']
+		meta_url = movieinfo['metacritic url']
+		mean_rating = movieinfo['arithmetic mean']
+		median_rating = movieinfo['median']
+		embed=discord.Embed(title=moviename.upper(),description='IMDb Summary',colour=discord.Colour.magenta())
+		embed.add_field(name='Plot',value=plot,inline=False)
+		embed.add_field(name='Metascore',value=metascore,inline=False)
+		embed.add_field(name='Metacritic',value=meta_url,inline=False)
+		embed.add_field(name='Mean Rating',value=mean_rating,inline=True)
+		embed.add_field(name='Median Rating',value=median_rating,inline=True)
+		await client.send_message(message.channel,embed=embed)	
 		
 	#Wikipedia Search
 	
