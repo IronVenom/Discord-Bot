@@ -307,7 +307,7 @@ async def on_message(message):
 		status_mems = [online,offline,idle,do_not_disturb]
 		plt.bar(y_pos, status_mems, align='center', alpha=0.5, color = ['green','grey','yellow','red'])
 		plt.xticks(y_pos, stats)
-		plt.yticks(np.arange(0,max(status_mems)+1, step=1))
+		plt.yticks(np.arange(0,max(status_mems)+1, step=(max(status_mems))//2))
 		plt.ylabel('Members')
 		plt.title('Status Statistics')
 		plt.savefig('stats.png')
