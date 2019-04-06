@@ -49,6 +49,16 @@ async def on_message(message):
 
 # 	with open('users.json','w') as f:
 # 		json.dump(users, f)
+
+	# Funny Kill command 
+	
+	if message.content.upper().startswith('KILL!'):
+		file = open('killcommand.txt','r')
+		kills = file.readlines()
+		di = message.content.split(' ')[1]
+		msg = '{} {}'.format(di,random.choice(kills))
+		embed = discord.Embed(title = 'The Kill command',description=msg,color = discord.Color.blue())
+		await client.send_message(message.channel,embed = embed)
 	
 	# Warn a Member
 	
@@ -68,10 +78,6 @@ async def on_message(message):
 			embed=discord.Embed(title='Warning',description='{} You are not allowed to use this command!'.format(message.author.mention),colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
 
-
-
-		
-	
 	#Add Topic Based Roles
 
 	if message.content.upper().startswith('TOPICROLE!'):
@@ -465,6 +471,7 @@ async def on_message(message):
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
 		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
 		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
+		embed.add_field(name='kill!'mention_user,value='Have fun with this :joy:!', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		
 	#MOD Commands Help
