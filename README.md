@@ -23,4 +23,3 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Google Search ( Programming Doubts )
 * Urban Dictionary search command.
 
-You are free to use parts of the code as long as you fork the repository or do not copy paste the entire code.
