@@ -21,7 +21,6 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Language Translation command - translate languages from one to the other.
 * Calculator
 * Google Search ( Programming Doubts )
-* Experience System along with profile card and leaderboard.
 * Urban Dictionary search command.
 
-You are free to use parts of the code as long as you fork the repository.
+You are free to use parts of the code as long as you fork the repository or do not copy paste the entire code.
