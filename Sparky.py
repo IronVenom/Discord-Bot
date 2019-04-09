@@ -471,8 +471,8 @@ async def on_message(message):
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
 		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
 		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
-# 		embed.add_field(name='kill! mention_user',value='Have fun with this :joy:!', inline=False)
 		await client.send_message(message.channel,embed=embed)
+		#fun kill command removed.
 		
 	#MOD Commands Help
 
