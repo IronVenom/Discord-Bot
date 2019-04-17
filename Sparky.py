@@ -130,7 +130,7 @@ async def on_message(message):
 	#TOPIC Based Roles Help
 
 	if message.content.upper().startswith('TPHELP!'):
-		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security [ Note that there is a space after topicrole! and topicroleremove!.]',colour=discord.Colour.purple())
+		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
 		embed.add_field(name='topicrole! name of role from above 4',value='Adds the role',inline=False)
 		embed.add_field(name='topicroleremove! removes role from above 4',value='Removes the role',inline=False)
 		embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicrolermove! machine learning\nAlso note that the commands are case insensitive.',inline = False)
@@ -604,6 +604,7 @@ async def on_message(message):
 		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python',colour=discord.Colour.purple())
 		embed.add_field(name='langrole! name of role from above 4',value='Adds the role',inline=False)
 		embed.add_field(name='langroleremove! removes role from above 4',value='Removes the role',inline=False)
+		embed.add_field(name='Example',value = 'langrole! Python\nlangroleremove! Python\nAlso note that the commands are case insensitive.',inline = False)
 		await client.send_message(message.channel,embed=embed)
 
 	#Add Language Based Roles
