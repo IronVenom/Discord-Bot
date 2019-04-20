@@ -85,8 +85,7 @@ async def on_message(message):
 		await client.delete_message(help8)
 		await client.delete_message(help9)
 		await client.delete_message(help0)
-
-
+		await client.delete_message(message)
 
 	# Boredom Command 
 
@@ -496,6 +495,7 @@ async def on_message(message):
 		embed.add_field(name='profile!',value='Check out your profile card.',inline=False)
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
 		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
+		embed.add_field(name='menu!',value='To get the entire list of Sparky\'s commands.',inline=False)
 		embed.add_field(name='suggest! suggestion',value='Create a suggestion for the server',inline=False)
 # 		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
 		await client.send_message(message.channel,embed=embed)
