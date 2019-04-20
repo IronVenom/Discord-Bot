@@ -59,7 +59,23 @@ async def on_message(message):
 # 		msg = '{} {}'.format(di,random.choice(kills))
 # 		embed = discord.Embed(title = 'The Kill command',description=msg,color = discord.Color.blue())
 # 		await client.send_message(message.channel,embed = embed)
-	
+
+	# Boredom Command 
+
+	if message.content.upper().startswith('BORED!'):
+
+		activity = eval(requests.get('https://www.boredapi.com/api/activity/').text)['activity']
+		embed = discord.Embed(title = 'Bored? Try out this activity!', description = activity, color = discord.Color.blue())
+		await client.send_message(message.channel,embed = embed)
+
+	# Quote Command
+
+	if message.content.upper().startswith('QUOTE!'):
+
+		quote = eval(requests.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1').text)[0]['content'].split('<p>')[1].split('<\\/p>')[0]
+		embed = discord.Embed(title = 'Sparky says...', description = quote, color = discord.Color.magenta())
+		await client.send_message(message.channel,embed = embed)
+		
 	# Warn a Member
 	
 	if message.content.upper().startswith('WARN!'):
@@ -472,6 +488,8 @@ async def on_message(message):
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
 		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
 		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
+		embed.add_field(name='bored!',value='Ask Sparky what to do if you are bored.', inline=False)
+		embed.add_field(name='quote!',value='Get motivated by motivational quotes.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
