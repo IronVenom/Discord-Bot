@@ -59,6 +59,34 @@ async def on_message(message):
 # 		msg = '{} {}'.format(di,random.choice(kills))
 # 		embed = discord.Embed(title = 'The Kill command',description=msg,color = discord.Color.blue())
 # 		await client.send_message(message.channel,embed = embed)
+	
+	# Mega Menu
+
+	if message.content.upper().startswith('MENU!'):
+		
+		help1 = await client.send_message(message.channel,'servhelp!')
+		help2 = await client.send_message(message.channel,'funhelp!')
+		help3 = await client.send_message(message.channel,'calchelp!')
+		help4 = await client.send_message(message.channel,'modhelp!')
+		help5 = await client.send_message(message.channel,'translatehelp!')
+		help6 = await client.send_message(message.channel,'lrhelp!')
+		help7 = await client.send_message(message.channel,'tphelp!')
+		help8 = await client.send_message(message.channel,'utilhelp!')
+		help9 = await client.send_message(message.channel,'datahelp!')
+		help0 = await client.send_message(message.channel,'psrules!')
+
+		await client.delete_message(help1)
+		await client.delete_message(help2)
+		await client.delete_message(help3)
+		await client.delete_message(help4)
+		await client.delete_message(help5)
+		await client.delete_message(help6)
+		await client.delete_message(help7)
+		await client.delete_message(help8)
+		await client.delete_message(help9)
+		await client.delete_message(help0)
+
+
 
 	# Boredom Command 
 
