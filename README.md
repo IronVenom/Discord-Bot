@@ -9,6 +9,8 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Googletrans
 * Gsearch
 * Urbandictionary
+* Bored API
+* Quotes on Design
 
 ### Features - 
 * Simple games
