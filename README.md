@@ -12,6 +12,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Bored API
 * Quotes on Design
 * Advice Slip JSON API
+* Lyricwikia
 
 ### Features - 
 * Simple games
