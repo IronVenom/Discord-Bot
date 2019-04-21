@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import operator
 import json
 import urbandict
+import lyricwikia
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
