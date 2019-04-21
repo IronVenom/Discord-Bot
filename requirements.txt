@@ -8,3 +8,4 @@ gsearch
 numpy
 matplotlib
 urbandict
+lyricwikia
