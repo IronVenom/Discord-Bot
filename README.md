@@ -25,4 +25,5 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Calculator
 * Google Search ( Programming Doubts )
 * Urban Dictionary search command.
+* Tons of other commands.
 
