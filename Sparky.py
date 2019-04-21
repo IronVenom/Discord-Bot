@@ -86,6 +86,14 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+		
+	#Advice command:
+
+	if message.content.upper().startswith('ADVICE!'):
+
+		advice = eval(requests.get('https://api.adviceslip.com/advice').text)['slip']['advice']
+		embed = discord.Embed(title = 'Dr Sparky gives the following advice-',description=advice,color = discord.Color.dark_green())
+		await client.send_message(message.channel,embed = embed)
 
 	# Boredom Command 
 
@@ -518,6 +526,7 @@ async def on_message(message):
 		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
 		embed.add_field(name='bored!',value='Ask Sparky what to do if you are bored.', inline=False)
 		embed.add_field(name='quote!',value='Get motivated by motivational quotes.', inline=False)
+		embed.add_field(name='advice!',value='Get friendly advice from Dr Sparky.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
