@@ -87,6 +87,18 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 		
+	# Lyrics Command:
+
+	if message.content.upper().startswith('LYRICS!'):
+
+		messg = ' '.join(message.content.split(' ')[1:])
+		artist = messg.split('+')[0]
+		song = messg.split('+')[1]
+		print(artist, song)
+		lyrics = lyricwikia.get_lyrics(artist,song)
+		embed  = discord.Embed(title = 'Lyrics of {}'.format(song.upper()),description = lyrics,color = discord.Color.dark_purple())
+		await client.send_message(message.channel,embed = embed)
+		
 	#Advice command:
 
 	if message.content.upper().startswith('ADVICE!'):
@@ -527,6 +539,7 @@ async def on_message(message):
 		embed.add_field(name='bored!',value='Ask Sparky what to do if you are bored.', inline=False)
 		embed.add_field(name='quote!',value='Get motivated by motivational quotes.', inline=False)
 		embed.add_field(name='advice!',value='Get friendly advice from Dr Sparky.', inline=False)
+		embed.add_field(name='lyrics!(space)artist name+song name',value='Lyrics of a song. Note that there is a space after lyrics!, and that artist name and song name have a plus sign in between them. There is no space between artist name and song name, only a plus sign.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
