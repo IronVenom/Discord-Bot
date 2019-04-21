@@ -11,6 +11,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Urbandictionary
 * Bored API
 * Quotes on Design
+* Advice Slip JSON API
 
 ### Features - 
 * Simple games
