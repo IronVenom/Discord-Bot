@@ -88,6 +88,14 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 		
+	# Random Maths facts
+
+	if message.content.upper().startswith('MATH!'):
+
+		fact = requests.get('http://numbersapi.com/random/math').text
+		embed = discord.Embed(title = 'Maths Fun Fact', description = fact,color = discord.Color.dark_orange())
+		await client.send_message(message.channel,embed = embed)
+		
 	# Lyrics Command:
 
 	if message.content.upper().startswith('LYRICS!'):
@@ -551,6 +559,7 @@ async def on_message(message):
 		embed.add_field(name='advice!',value='Get friendly advice from Dr Sparky.', inline=False)
 		embed.add_field(name='lyrics!(space)artist name+song name',value='Lyrics of a song. Note that there is a space after lyrics!, and that artist name and song name have a plus sign in between them. There is no space between artist name and song name, only a plus sign.', inline=False)
 		embed.add_field(name='cat!',value='Picture of a cute cat.', inline=False)
+		embed.add_field(name='math!',value='Random fun fact of about the universal languauge - Mathematics.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
