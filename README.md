@@ -14,6 +14,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Advice Slip JSON API
 * Lyricwikia
 * RandomCat
+* Numbers API
 
 ### Features - 
 * Simple games
