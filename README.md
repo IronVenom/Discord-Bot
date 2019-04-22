@@ -13,6 +13,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Quotes on Design
 * Advice Slip JSON API
 * Lyricwikia
+* RandomCat
 
 ### Features - 
 * Simple games
