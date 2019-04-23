@@ -576,6 +576,9 @@ async def on_message(message):
 		embed.add_field(name='cat!',value='Picture of a cute cat.', inline=False)
 		embed.add_field(name='math!',value='Random fun fact of about the universal languauge - Mathematics.', inline=False)
 		await client.send_message(message.channel,embed=embed)
+		embed=discord.Embed(title='Fun Commands 2',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.blue())
+		embed.add_field(name='recipe! query',value='Get advice from Sparky on how to cook your favorite dish.',inline=False)
+		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
 	#MOD Commands Help
