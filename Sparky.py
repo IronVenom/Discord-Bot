@@ -88,6 +88,16 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 		
+	#xkcd Comics Command
+
+	if message.content.upper().startswith('XKCD_COMIC!'):
+
+		issue = message.content.split(' ')[1]
+		img = eval(requests.get('https://xkcd.com/{}/info.0.json'.format(issue)).text)['img']
+		embed = discord.Embed(color = discord.Color.orange())
+		embed.set_image(url = img)
+		await client.send_message(message.channel,embed = embed)
+		
 	# Recipes Command
 
 	if message.content.upper().startswith('RECIPE!'):
@@ -578,6 +588,7 @@ async def on_message(message):
 		await client.send_message(message.channel,embed=embed)
 		embed=discord.Embed(title='Fun Commands 2',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.blue())
 		embed.add_field(name='recipe! query',value='Get advice from Sparky on how to cook your favorite dish.',inline=False)
+		embed.add_field(name='xkcd_comic! issue_number',value='The issue number must be an integer. See your favorite xkcd comics!',inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
