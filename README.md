@@ -15,6 +15,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Lyricwikia
 * RandomCat
 * Numbers API
+* Recipe Puppy API
 
 ### Features - 
 * Simple games
