@@ -94,7 +94,7 @@ async def on_message(message):
 
 		issue = message.content.split(' ')[1]
 		img = eval(requests.get('https://xkcd.com/{}/info.0.json'.format(issue)).text)['img']
-		embed = discord.Embed(color = discord.Color.orange())
+		embed = discord.Embed(title = 'XKCD Comics issue {}'.format(issue),color = discord.Color.orange())
 		embed.set_image(url = img)
 		await client.send_message(message.channel,embed = embed)
 		
