@@ -88,6 +88,21 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 		
+	# Recipes Command
+
+	if message.content.upper().startswith('RECIPE!'):
+
+		item = ' '.join(message.content.split(' ')[1::])
+		string = 'http://www.recipepuppy.com/api/?q={}'.format(item)
+		title = eval(requests.get(string).text)['results'][0]['title']
+		ingredients = eval(requests.get(string).text)['results'][0]['ingredients']
+		link = ''.join(eval(requests.get(string).text)['results'][0]['href'].split('\\'))
+		embed = discord.Embed(title = 'Chef Sparky, Recipe for {}'.format(item.upper()),description = 'Mamma Mia!',color = discord.Color.blue())
+		embed.add_field(name = 'Title',value = title,inline = False)
+		embed.add_field(name = 'Ingredients',value = ingredients,inline = False)
+		embed.add_field(name = 'Link for Recipe',value = link,inline = False)
+		await client.send_message(message.channel,embed = embed)
+		
 	# Random Maths facts
 
 	if message.content.upper().startswith('MATH!'):
