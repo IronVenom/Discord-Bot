@@ -87,6 +87,24 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+	
+	# Dog Picture Command
+
+	if message.content.upper().startswith('DOG!'):
+
+		pic = eval(requests.get('https://random.dog/woof.json').text)['url']
+		embed = discord.Embed(color = discord.Color.blue())
+		embed.set_image(url = pic)
+		await client.send_message(message.channel,embed = embed)
+
+	# Fox Picture Command
+
+	if message.content.upper().startswith('FOX!'):
+
+		pic =  ''.join(eval(requests.get('https://randomfox.ca/floof/').text)['image'].split('\\'))
+		embed = discord.Embed(color = discord.Color.blue())
+		embed.set_image(url = pic)
+		await client.send_message(message.channel,embed = embed)
 		
 	#xkcd Comics Command
 
@@ -589,6 +607,8 @@ async def on_message(message):
 		embed=discord.Embed(title='Fun Commands 2',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.blue())
 		embed.add_field(name='recipe! query',value='Get advice from Sparky on how to cook your favorite dish.',inline=False)
 		embed.add_field(name='xkcd_comic! issue_number',value='The issue number must be an integer. See your favorite xkcd comics!',inline=False)
+		embed.add_field(name='dog!',value='Picture of a dog.', inline=False)
+		embed.add_field(name='fox!',value='Picture of a fox.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
