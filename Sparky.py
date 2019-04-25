@@ -87,6 +87,36 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+		
+	# Currency Exchange Table
+
+	if message.content.upper().startswith('CURTABLE!'):
+		embed = discord.Embed(color = discord.Color.green())
+		embed.set_image(url = 'https://i.imgur.com/WUJ2pvt.jpg')
+		await client.send_message(message.channel,embed = embed)
+		embed = discord.Embed(color = discord.Color.green())
+		embed.set_image(url = 'https://i.imgur.com/IkVjMXL.jpg')
+		await client.send_message(message.channel,embed = embed)
+		embed = discord.Embed(color = discord.Color.green())
+		embed.set_image(url = 'https://i.imgur.com/dNwjvXZ.jpg')
+		await client.send_message(message.channel,embed = embed)
+		embed = discord.Embed(color = discord.Color.green())
+		embed.set_image(url = 'https://i.imgur.com/noyeWvc.jpg')
+		await client.send_message(message.channel,embed = embed)
+		
+	# Currency Exchange Command
+
+	if message.content.upper().startswith('CURINFO!'):
+		base = message.content.split(' ')[1]
+		sym = message.content.split(' ')[2]
+		info =  eval(requests.get('https://api.exchangeratesapi.io/latest?base={}&symbols={}'.format(base.upper(),sym.upper())).text)
+		rates = info['rates']
+		string = ''
+		for i,j in rates.items():
+			string+='{} : {}\n'.format(i,j)
+		embed = discord.Embed(title = 'Currency Exchange Info',description = base.upper(),color = discord.Color.orange())
+		embed.add_field(name = 'Exchange Rate',value = string,inline = False)
+		await client.send_message(message.channel,embed = embed)
 	
 	# Dog Picture Command
 
@@ -565,6 +595,8 @@ async def on_message(message):
 		embed.add_field(name='stackov! Query',value='Search for solutions to programming doubts.',inline=False)
 		embed.add_field(name='embed! text to be embedded',value = 'Embeds text.',inline = False)
 		embed.add_field(name='google! Query',value = 'Search google',inline = False)
+		embed.add_field(name='curtable!',value = 'Currency Codes',inline = False)
+		embed.add_field(name='curinfo! base_currency currency',value = 'Get the exchange rate for a currency for the base_currency',inline = False)
 		await client.send_message(message.channel,embed=embed)
 	
 	#Server Related Commands
