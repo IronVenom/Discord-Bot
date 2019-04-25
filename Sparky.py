@@ -418,7 +418,7 @@ async def on_message(message):
 	# 1.) Roles information
 	
 	if message.content.upper().startswith('ROLES!'):
-		server=client.get_server(os.getenv('SERVER_ID'))
+		server=message.server
 		roles_list=server.role_hierarchy
 		for role in roles_list:
 			if not role.is_everyone:
@@ -428,7 +428,7 @@ async def on_message(message):
 	# 2.) Server information
 	
 	if message.content.upper().startswith('INFO!'):
-		server=client.get_server(os.getenv('SERVER_ID'))
+		server=message.server
 		people_count=server.member_count
 		time_of_creation=server.created_at
 		owner_name=server.owner.name
@@ -445,7 +445,7 @@ async def on_message(message):
 	# Bar Plot depicting statuses of people 
 	
 	if message.content.upper().startswith("STATUS!"):
-		server=client.get_server(os.getenv('SERVER_ID'))
+		server=message.server
 		mem_list = server.members
 		online = 0
 		offline = 0
@@ -529,7 +529,7 @@ async def on_message(message):
 
 	# 1.) Kick a user
 	if message.content.upper().startswith("KICK!"):
-		server=client.get_server(os.getenv('SERVER_ID'))
+		server=message.server
 		flag=False
 		if message.author.server_permissions.kick_members == True and message.author.server_permissions.ban_members ==  True:
 			flag=True
@@ -546,7 +546,7 @@ async def on_message(message):
 			await client.send_message(message.channel,embed=embed)
 	# 2.) Ban a user
 	if message.content.upper().startswith("BAN!"):
-		server=client.get_server(os.getenv('SERVER_ID'))
+		server=message.server
 		flag=False
 		if message.author.server_permissions.kick_members == True and message.author.server_permissions.ban_members ==  True:
 			flag=True
@@ -624,7 +624,7 @@ async def on_message(message):
 		embed.add_field(name='movie! name of Movie / TV Series /  Video Game',value='Gives the plot summary of the Movie/ TV series / Video Game',inline=False)
 		embed.add_field(name='hello! / yo! / wazz poppin!',value='Sparky says hi to you', inline=False)
 		embed.add_field(name='cookie! mention user',value='Give someone a delicious cookie', inline=False)
-		embed.add_field(name='sparkygif! gif topic',value='Posts a GIF on the mentioned topic', inline=False)
+# 		embed.add_field(name='sparkygif! gif topic',value='Posts a GIF on the mentioned topic', inline=False)
 		embed.add_field(name='poll! item1-without-spaces item2-without-spaces',value='Creates a 2 item poll', inline=False)
 		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
 		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
@@ -824,19 +824,19 @@ async def on_message(message):
 			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(lang_role_channel.mention),colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
 	
-	#GIFs
+# 	#GIFs
 
-	if message.content.upper().startswith('SPARKYGIF!'):
-		g = safygiphy.Giphy()
-		target = message.content.split(' ')[1]
-		gif = g.random(tag=target)['data']['url']
-		await client.send_message(message.channel,gif)
+# 	if message.content.upper().startswith('SPARKYGIF!'):
+# 		g = safygiphy.Giphy()
+# 		target = message.content.split(' ')[1]
+# 		gif = g.random(tag=target)['data']['url']
+# 		await client.send_message(message.channel,gif)
 		
 	#Profile
 
 	if message.content.upper().startswith('PROFILE!'):
 		if message.content.upper() == "PROFILE!":
-			server=client.get_server(os.getenv('SERVER_ID'))
+			server=message.server
 			name = message.author.name
 			pfp = message.author.avatar_url
 			joindate = message.author.joined_at
@@ -861,7 +861,7 @@ async def on_message(message):
 			embed.add_field(name='Roles:',value=string,inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
-			server=client.get_server(os.getenv('SERVER_ID'))
+			server=message.server
 			for mem in server.members:
 				if mem.mentioned_in(message) ==  True:
 					name = mem.name
