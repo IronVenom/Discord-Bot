@@ -233,63 +233,82 @@ async def on_message(message):
 			await client.send_message(message.channel,embed=embed)
 
 	#Add Topic Based Roles
-
+		
 	if message.content.upper().startswith('TOPICROLE!'):
-		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
-		if message.channel.id == topic_role_channel.id:
-			arg = ' '.join(message.content.split(' ')[1:])
-			server=client.get_server(os.getenv('SERVER_ID'))
-			role_member = None
-			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
-				for role in server.roles:
-					if role.name.upper() == arg.upper():
-						await client.add_roles(message.author,role)
-						role_member = role
-						break
-				await client.delete_message(message)
-				embed = discord.Embed(title=message.author.name,description='You have been alloted the {} role!'.format(role_member.mention),colour=role_member.colour)
-				await client.send_message(message.channel,embed=embed)
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+			if message.channel.id == topic_role_channel.id:
+				arg = ' '.join(message.content.split(' ')[1:])
+				server=client.get_server(os.getenv('SERVER_ID'))
+				role_member = None
+				if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+					for role in server.roles:
+						if role.name.upper() == arg.upper():
+							await client.add_roles(message.author,role)
+							role_member = role
+							break
+					await client.delete_message(message)
+					embed = discord.Embed(title=message.author.name,description='You have been alloted the {} role!'.format(role_member.mention),colour=role_member.colour)
+					await client.send_message(message.channel,embed=embed)
+				else:
+					embed = discord.Embed(title='WARNING',description='You are not allowed to add this role.',colour=discord.Colour.red())
+					await client.send_message(message.channel,embed=embed)
 			else:
-				embed = discord.Embed(title='WARNING',description='You are not allowed to add this role.',colour=discord.Colour.red())
+				embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
 				await client.send_message(message.channel,embed=embed)
-		else:
-			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
+		
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
-
 
 	#Remove Topic Based Roles	
 
 	if message.content.upper().startswith('TOPICROLEREMOVE!'):
-		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
-		if message.channel.id == topic_role_channel.id:
-			arg = ' '.join(message.content.split(' ')[1:])
-			server=client.get_server(os.getenv('SERVER_ID'))
-			role_member = None
-			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
-				for role in server.roles:
-					if role.name.upper() == arg.upper():
-						await client.remove_roles(message.author,role)
-						role_member = role
-						break
-				await client.delete_message(message)
-				embed = discord.Embed(title=message.author.name,description='You have removed the {} role!'.format(role_member.mention),colour=role_member.colour)
-				await client.send_message(message.channel,embed=embed)
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+			if message.channel.id == topic_role_channel.id:
+				arg = ' '.join(message.content.split(' ')[1:])
+				server=client.get_server(os.getenv('SERVER_ID'))
+				role_member = None
+				if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+					for role in server.roles:
+						if role.name.upper() == arg.upper():
+							await client.remove_roles(message.author,role)
+							role_member = role
+							break
+					await client.delete_message(message)
+					embed = discord.Embed(title=message.author.name,description='You have removed the {} role!'.format(role_member.mention),colour=role_member.colour)
+					await client.send_message(message.channel,embed=embed)
+				else:
+					embed = discord.Embed(title='WARNING',description='You are not allowed to remove this role.',colour=discord.Colour.red())
+					await client.send_message(message.channel,embed=embed)
 			else:
-				embed = discord.Embed(title='WARNING',description='You are not allowed to remove this role.',colour=discord.Colour.red())
+				embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
 				await client.send_message(message.channel,embed=embed)
-		else:
-			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(topic_role_channel.mention),colour=discord.Colour.red())
+			
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
 
 	#TOPIC Based Roles Help
 
 	if message.content.upper().startswith('TPHELP!'):
-		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
-		embed.add_field(name='topicrole! name of role from above 4',value='Adds the role',inline=False)
-		embed.add_field(name='topicroleremove! removes role from above 4',value='Removes the role',inline=False)
-		embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicroleremove! machine learning\nAlso note that the commands are case insensitive.',inline = False)
-		await client.send_message(message.channel,embed=embed)
-
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
+			embed.add_field(name='topicrole! name of role from above 4',value='Adds the role',inline=False)
+			embed.add_field(name='topicroleremove! removes role from above 4',value='Removes the role',inline=False)
+			embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicroleremove! machine learning\nAlso note that the commands are case insensitive.',inline = False)
+			await client.send_message(message.channel,embed=embed)
+				
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
 		
 	# Urban Dictionary
 	
@@ -312,18 +331,24 @@ async def on_message(message):
 	# Suggest
 		
 	if message.content.upper().startswith('SUGGEST!'):
-		args = ' '.join(message.content.split(' ')[1:])
-		name = message.author.name
-		timemsg = message.timestamp
-		embed = discord.Embed(title='Lucifer\'s Dropbox',description='Suggestion created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
-		embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
-		embed.add_field(name='Suggestion',value=args,inline= False)
-		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
-		await client.send_message(suggestion_channel,embed = embed)
-		embed =  discord.Embed(title = "Suggestion",description = "Your suggestion has been recorded, please check {} for follow up.".format(suggestion_channel.mention),color = discord.Color.blue())
-		await client.send_message(message.channel,embed = embed)
-		await client.delete_message(message)
 		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			args = ' '.join(message.content.split(' ')[1:])
+			name = message.author.name
+			timemsg = message.timestamp
+			embed = discord.Embed(title='Lucifer\'s Dropbox',description='Suggestion created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
+			embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
+			embed.add_field(name='Suggestion',value=args,inline= False)
+			suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
+			await client.send_message(suggestion_channel,embed = embed)
+			embed =  discord.Embed(title = "Suggestion",description = "Your suggestion has been recorded, please check {} for follow up.".format(suggestion_channel.mention),color = discord.Color.blue())
+			await client.send_message(message.channel,embed = embed)
+			await client.delete_message(message)
+		
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
 		
 # 	# Leaderboard command
 
@@ -662,23 +687,31 @@ async def on_message(message):
 	#Practice Session Rules
 
 	if message.content.upper().startswith('PSRULES!'):
-		channel_CP = client.get_channel(os.getenv('CP_CHANNEL_ID'))
-		role_id_list=[]
-		for role in message.server.roles:
-			if role.name.upper() == 'PROGRAMMERS':
-				role_id_list.append(role.mention)
-			if role.name.upper() == 'CODERS':
-				role_id_list.append(role.mention)
-		embed = discord.Embed(title='Practice Session Rules',description='To be followed by everyone who is participating',colour=discord.Colour.red())
-		embed.add_field(name='Rule-1',value='Post your solutions in {} using appropriate discord markdown.'.format(channel_CP),inline='False')
-		embed.add_field(name='Rule-2',value='If you have a doubt, ping anyone of the support staff mentioned below. Don\'t ping the entire role',inline='False')
-		embed.add_field(name='Rule-3',value='Try to make your code as efficient as possible. If you don\'t know about efficiency, leave this point.',inline='False')
-		embed.add_field(name='Rule-4',value='Do not cheat or copy.',inline='False')
-		embed.add_field(name='Rule-5',value='Use logic along with the in-built functions to get the most output.',inline='False')
-		embed.add_field(name='Rule-6',value='Use C++ / C /Python / Java. If you feel excited, use Haskell or Erlang at your own risk.',inline='False')
-		embed.add_field(name='Link for Discord Markup',value='https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-',inline='False')
-		embed.add_field(name='Support Staff',value=role_id_list[0]+'\n'+role_id_list[1],inline='False')
-		await client.send_message(message.channel,embed=embed)
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			channel_CP = client.get_channel(os.getenv('CP_CHANNEL_ID'))
+			role_id_list=[]
+			for role in message.server.roles:
+				if role.name.upper() == 'PROGRAMMERS':
+					role_id_list.append(role.mention)
+				if role.name.upper() == 'CODERS':
+					role_id_list.append(role.mention)
+			embed = discord.Embed(title='Practice Session Rules',description='To be followed by everyone who is participating',colour=discord.Colour.red())
+			embed.add_field(name='Rule-1',value='Post your solutions in {} using appropriate discord markdown.'.format(channel_CP),inline='False')
+			embed.add_field(name='Rule-2',value='If you have a doubt, ping anyone of the support staff mentioned below. Don\'t ping the entire role',inline='False')
+			embed.add_field(name='Rule-3',value='Try to make your code as efficient as possible. If you don\'t know about efficiency, leave this point.',inline='False')
+			embed.add_field(name='Rule-4',value='Do not cheat or copy.',inline='False')
+			embed.add_field(name='Rule-5',value='Use logic along with the in-built functions to get the most output.',inline='False')
+			embed.add_field(name='Rule-6',value='Use C++ / C /Python / Java. If you feel excited, use Haskell or Erlang at your own risk.',inline='False')
+			embed.add_field(name='Link for Discord Markup',value='https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-',inline='False')
+			embed.add_field(name='Support Staff',value=role_id_list[0]+'\n'+role_id_list[1],inline='False')
+			await client.send_message(message.channel,embed=embed)
+		
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
+			
 	#PING
 		
 	if message.content.upper().startswith('PING!'):
@@ -770,58 +803,79 @@ async def on_message(message):
 	#Language Based Roles Help
 
 	if message.content.upper().startswith('LRHELP!'):
-		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python',colour=discord.Colour.purple())
-		embed.add_field(name='langrole! name of role from above 4',value='Adds the role',inline=False)
-		embed.add_field(name='langroleremove! removes role from above 4',value='Removes the role',inline=False)
-		embed.add_field(name='Example',value = 'langrole! Python\nlangroleremove! Python\nAlso note that the commands are case insensitive.',inline = False)
-		await client.send_message(message.channel,embed=embed)
-
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python',colour=discord.Colour.purple())
+			embed.add_field(name='langrole! name of role from above 4',value='Adds the role',inline=False)
+			embed.add_field(name='langroleremove! removes role from above 4',value='Removes the role',inline=False)
+			embed.add_field(name='Example',value = 'langrole! Python\nlangroleremove! Python\nAlso note that the commands are case insensitive.',inline = False)
+			await client.send_message(message.channel,embed=embed)
+		
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
+		
 	#Add Language Based Roles
 
 	if message.content.upper().startswith('LANGROLE!'):
-		lang_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
-		if message.channel.id == lang_role_channel.id:
-			arg = message.content.split(' ')[1]
-			server=client.get_server(os.getenv('SERVER_ID'))
-			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
-				for role in server.roles:
-					if role.name.upper() == arg.upper():
-						await client.add_roles(message.author,role)
-						role_member = role
-						break
-				await client.delete_message(message)
-				embed = discord.Embed(title=message.author.name,description='You have been alloted the {} role!'.format(role_member.mention),colour=role_member.colour)
-				await client.send_message(message.channel,embed=embed)
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			lang_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
+			if message.channel.id == lang_role_channel.id:
+				arg = message.content.split(' ')[1]
+				server=client.get_server(os.getenv('SERVER_ID'))
+				role_member = None
+				if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
+					for role in server.roles:
+						if role.name.upper() == arg.upper():
+							await client.add_roles(message.author,role)
+							role_member = role
+							break
+					await client.delete_message(message)
+					embed = discord.Embed(title=message.author.name,description='You have been alloted the {} role!'.format(role_member.mention),colour=role_member.colour)
+					await client.send_message(message.channel,embed=embed)
+				else:
+					embed = discord.Embed(title='WARNING',description='You are not allowed to add this role.',colour=discord.Colour.red())
+					await client.send_message(message.channel,embed=embed)
 			else:
-				embed = discord.Embed(title='WARNING',description='You are not allowed to add this role.',colour=discord.Colour.red())
+				embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(lang_role_channel.mention),colour=discord.Colour.red())
 				await client.send_message(message.channel,embed=embed)
-		else:
-			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(lang_role_channel.mention),colour=discord.Colour.red())
+				
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
 
 	#Remove Language Based Roles	
 
 	if message.content.upper().startswith('LANGROLEREMOVE!'):
-		lang_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
-		if message.channel.id == lang_role_channel.id:
-			arg = message.content.split(' ')[1]
-			server=client.get_server(os.getenv('SERVER_ID'))
-			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
-				for role in server.roles:
-					if role.name.upper() == arg.upper():
-						await client.remove_roles(message.author,role)
-						role_member = role
-						break
-				await client.delete_message(message)
-				embed = discord.Embed(title=message.author.name,description='You have removed the {} role!'.format(role_member.mention),colour=role_member.colour)
-				await client.send_message(message.channel,embed=embed)
+		
+		if message.server.id == client.get_server(os.getenv('SERVER_ID')):
+			
+			lang_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
+			if message.channel.id == lang_role_channel.id:
+				arg = message.content.split(' ')[1]
+				server=client.get_server(os.getenv('SERVER_ID'))
+				role_member = None
+				if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
+					for role in server.roles:
+						if role.name.upper() == arg.upper():
+							await client.remove_roles(message.author,role)
+							role_member = role
+							break
+					await client.delete_message(message)
+					embed = discord.Embed(title=message.author.name,description='You have removed the {} role!'.format(role_member.mention),colour=role_member.colour)
+					await client.send_message(message.channel,embed=embed)
+				else:
+					embed = discord.Embed(title='WARNING',description='You are not allowed to remove this role.',colour=discord.Colour.red())
+					await client.send_message(message.channel,embed=embed)
 			else:
-				embed = discord.Embed(title='WARNING',description='You are not allowed to remove this role.',colour=discord.Colour.red())
+				embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(lang_role_channel.mention),colour=discord.Colour.red())
 				await client.send_message(message.channel,embed=embed)
-		else:
-			embed = discord.Embed(title='Warning',description='You can use this command only in {}'.format(lang_role_channel.mention),colour=discord.Colour.red())
+				
+		else:	
+			embed = discord.Embed(title = 'Sorry',description = 'This command is not available for this server.',colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
 	
 # 	#GIFs
@@ -1178,33 +1232,39 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-	server=client.get_server(os.getenv('SERVER_ID'))
-	userid=member.mention
-	channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
-	channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
-	language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
-	topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
-	msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
-	await client.send_message(channel,msg)
 	
-# 	# Creating an user account for exp system.
+	if member.server.id == client.get_server(os.getenv('SERVER_ID')):
+		
+		server=client.get_server(os.getenv('SERVER_ID'))
+		userid=member.mention
+		channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
+		channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
+		language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
+		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+		msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
+		await client.send_message(channel,msg)
 
-# 	with open('users.json','r') as f:
-# 		users = json.load(f)
+	# 	# Creating an user account for exp system.
 
-# 	await update_data(users,member)
+	# 	with open('users.json','r') as f:
+	# 		users = json.load(f)
 
-# 	with open('users.json','w') as f:
-# 		json.dump(users, f)
+	# 	await update_data(users,member)
+
+	# 	with open('users.json','w') as f:
+	# 		json.dump(users, f)
 
 #Bidding goodbye when a member leaves.
 
 @client.event
 async def on_member_remove(member):
-	userid=member.mention
-	channel=client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
-	msg='Farewell {}! Best of luck for the future!'.format(userid)
-	await client.send_message(channel,msg)
+	
+	if member.server.id == client.get_server(os.getenv('SERVER_ID')):
+		
+		userid=member.mention
+		channel=client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
+		msg='Farewell {}! Best of luck for the future!'.format(userid)
+		await client.send_message(channel,msg)
 
 # #Tech News.
 
