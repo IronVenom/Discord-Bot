@@ -20,6 +20,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Recipe Puppy API
 * XKCD JSON API
 * Exchangeratesapi.io	
+* Robohash API
 
 ### Features - 
 * Simple games
