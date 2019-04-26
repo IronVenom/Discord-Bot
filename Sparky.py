@@ -87,6 +87,15 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+	
+	# Random Profile Pic command
+
+	if message.content.upper().startswith('MYPIC!'):
+
+		query = message.content.split(' ')[1]
+		embed = discord.Embed(color = discord.Color.dark_purple())
+		embed.set_image(url = 'https://robohash.org/{}.png'.format(query))
+		await client.send_message(message.channel,embed = embed)
 		
 	# Currency Exchange Table
 
@@ -642,6 +651,7 @@ async def on_message(message):
 		embed.add_field(name='xkcd_comic! issue_number',value='The issue number must be an integer. See your favorite xkcd comics!',inline=False)
 		embed.add_field(name='dog!',value='Picture of a dog.', inline=False)
 		embed.add_field(name='fox!',value='Picture of a fox.', inline=False)
+		embed.add_field(name='mypic! query',value='Get a picture of a bot according to the query!', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
