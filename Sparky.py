@@ -564,6 +564,10 @@ async def on_message(message):
 					await client.kick(mem_ber)
 					embed=discord.Embed(title='Kicked',description="{} has been kicked from the server".format(mem_ber.mention),colour=discord.Colour.red())
 					await client.send_message(message.channel,embed=embed)
+					logs = client.get_channel(os.getenv('LOGS'))
+					msg = '{} has been kicked from the server'.format(mem_ber.mention)
+					embed = discord.Embed(title = 'Kick',description = msg , color = discord.Color.blue())
+					await client.send_message(logs,embed = embed)
 					break
 
 		else:
@@ -581,6 +585,10 @@ async def on_message(message):
 					await client.ban(mem_ber,0)
 					embed=discord.Embed(title='Banned',description="{} has been banned from the server".format(mem_ber.mention),colour=discord.Colour.red())
 					await client.send_message(message.channel,embed=embed)
+					logs = client.get_channel(os.getenv('LOGS'))
+					msg = '{} has been banned from the server'.format(mem_ber.mention)
+					embed = discord.Embed(title = 'Ban',description = msg , color = discord.Color.blue())
+					await client.send_message(logs,embed = embed)
 					break
 
 		else:
