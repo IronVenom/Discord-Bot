@@ -102,6 +102,7 @@ async def on_message(message):
 		await client.send_message(message.channel,msg)
 		embed = discord.Embed(color = discord.Color.blue())
 		embed.set_image(url = url)
+		await client.send_message(message.channel,embed = embed)
 	
 	# Random Profile Pic command
 
