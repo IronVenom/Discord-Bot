@@ -29,6 +29,7 @@ ia=imdb.IMDb()
 Client = discord.Client()
 client = commands.Bot(command_prefix="!")
 translator = Translator()
+nasa_api = os.getenv('NASA_API')
 
 @client.event
 async def on_ready():
@@ -87,6 +88,20 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+		
+	# Nasa's Picture of the Day 
+
+	if message.content.upper().startswith('NASA_APOD!'):
+
+		info = requests.get('https://api.nasa.gov/planetary/apod?api_key={}'.format(nasa_api)).text
+		date = eval(info)['date']
+		information = eval(info)['explanation']
+		url = eval(info)['hdurl']
+		title = eval(info)['title']
+		msg = '**{}**\n'.format(title) + '**{}**\n'.format(date) + information 
+		await client.send_message(message.channel,msg)
+		embed = discord.Embed(color = discord.Color.blue())
+		embed.set_image(url = url)
 	
 	# Random Profile Pic command
 
@@ -185,7 +200,6 @@ async def on_message(message):
 		messg = ' '.join(message.content.split(' ')[1:])
 		artist = messg.split('+')[0]
 		song = messg.split('+')[1]
-		print(artist, song)
 		lyrics = lyricwikia.get_lyrics(artist,song)
 		embed  = discord.Embed(title = 'Lyrics of {}'.format(song.upper()),description = lyrics,color = discord.Color.dark_purple())
 		await client.send_message(message.channel,embed = embed)
@@ -652,6 +666,7 @@ async def on_message(message):
 		embed.add_field(name='dog!',value='Picture of a dog.', inline=False)
 		embed.add_field(name='fox!',value='Picture of a fox.', inline=False)
 		embed.add_field(name='mypic! query',value='Get a picture of a bot according to the query!', inline=False)
+		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
