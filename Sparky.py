@@ -792,6 +792,10 @@ async def on_message(message):
 			args = int(message.content.split(' ')[1])
 			print(args)
 			await client.purge_from(message.channel,limit=args)
+			logs = client.get_channel(os.getenv('LOGS'))
+			msg = 'Deleted {} messsages from {}'.format(args,message.channel.mention)
+			embed = discord.Embed(title = 'Purge',description = msg , color = discord.Color.blue())
+			await client.send_message(logs,embed = embed)
 		else:
 			embed = discord.Embed(title="Warning!",description='You are not allowed to use this command',colour=discord.Colour.red())
 			await client.send_message(message.channel,embed=embed)
