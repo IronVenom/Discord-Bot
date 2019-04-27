@@ -21,6 +21,7 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * XKCD JSON API
 * Exchangeratesapi.io	
 * Robohash API
+* NASA API
 
 ### Features - 
 * Simple games
