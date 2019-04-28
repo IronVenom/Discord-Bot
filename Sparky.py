@@ -847,9 +847,9 @@ async def on_message(message):
 
 	if message.content.upper().startswith('LRHELP!'):
 		
-		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python',colour=discord.Colour.purple())
-		embed.add_field(name='langrole! name of role from above 4',value='Adds the role',inline=False)
-		embed.add_field(name='langroleremove! removes role from above 4',value='Removes the role',inline=False)
+		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python/JavaScript/HTML-CSS/Rust/Erlang/Haskell/SQL/Assembly/Verilog-VHDL',colour=discord.Colour.purple())
+		embed.add_field(name='langrole! name of role from above',value='Adds the role',inline=False)
+		embed.add_field(name='langroleremove! removes role from above',value='Removes the role',inline=False)
 		embed.add_field(name='Example',value = 'langrole! Python\nlangroleremove! Python\nAlso note that the commands are case insensitive.',inline = False)
 		await client.send_message(message.channel,embed=embed)
 				
@@ -862,7 +862,7 @@ async def on_message(message):
 			arg = message.content.split(' ')[1]
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
+			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.add_roles(message.author,role)
@@ -887,7 +887,7 @@ async def on_message(message):
 			arg = message.content.split(' ')[1]
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA':
+			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.remove_roles(message.author,role)
