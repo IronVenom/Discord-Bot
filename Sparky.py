@@ -88,6 +88,28 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+	
+	# Purge Command for a specific user.
+	
+	if message.content.upper().startswith('PURGEMEM!'):
+
+		server=message.server
+		mem_list = server.members
+		logs = client.get_channel(os.getenv('LOGS'))
+		mems = message.content.split(' ')[1]
+		key = int(message.content.split(' ')[2])
+		args = key
+		async for message in client.logs_from(message.channel,limit = 10000000000000000000000000000000000000000000000000000000000000000000000000000000, before = datetime.now()):
+			if message.author.mention == mems:
+				if key != 0:
+					await client.delete_message(message)
+					key-=1
+			if key == 0:
+				break
+		msg = 'Deleted {} messsages from {} sent by {}'.format(args,message.channel.mention,mems)
+		embed = discord.Embed(title = 'Purge',description = msg , color = discord.Color.blue())
+		await client.send_message(logs,embed = embed)
+
 		
 	# Nasa's Picture of the Day 
 
@@ -697,6 +719,7 @@ async def on_message(message):
 		if message.author.server_permissions.kick_members == True and message.author.server_permissions.ban_members ==  True:
 			embed=discord.Embed(title='MOD COMMANDS',description='Can be used only by Admins.',colour=discord.Colour.red())
 			embed.add_field(name='purge! number of messages',value='Purges through a given number of messages.', inline=False)
+			embed.add_field(name='purgemem! mention_user number_of_messages_to_be_deleted',value='Purges through a given number of messages of a specific user.', inline=False)
 			embed.add_field(name='kick! user',value='Kicks the mentioned user from the server.', inline=False)
 			embed.add_field(name='ban! user',value='Bans the mentioned user from the server.', inline=False)
 			embed.add_field(name='technews!',value='Release tech news.', inline=False)
