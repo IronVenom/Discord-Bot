@@ -33,7 +33,7 @@ nasa_api = os.getenv('NASA_API')
 
 @client.event
 async def on_ready():
-	await client.change_presence(game=discord.Game(name='over 2 servers.',type = 3))
+	await client.change_presence(game=discord.Game(name='over Hell.',type = 3))
 	print("Badum tss, I am ready!")
   
 #Commands.
