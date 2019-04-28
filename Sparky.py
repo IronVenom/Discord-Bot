@@ -96,17 +96,18 @@ async def on_message(message):
 		info = requests.get('https://api.nasa.gov/planetary/apod?api_key={}'.format(nasa_api)).text
 		date = eval(info)['date']
 		information = eval(info)['explanation']
-		url = None
-		try:
-			url = eval(info)['hdurl']
-		except KeyError:
-			url = eval(info)['url']
 		title = eval(info)['title']
 		msg = '**{}**\n'.format(title) + '**{}**\n'.format(date) + information 
 		await client.send_message(message.channel,msg)
-		embed = discord.Embed(color = discord.Color.blue())
-		embed.set_image(url = url)
-		await client.send_message(message.channel,embed = embed)
+		url = None
+		try:
+			url = eval(info)['hdurl']
+			embed = discord.Embed(color = discord.Color.blue())
+			embed.set_image(url = url)
+			await client.send_message(message.channel,embed = embed)
+		except KeyError:
+			url = eval(info)['url']
+			await client.send_message(message.channel,url)
 	
 	# Random Profile Pic command
 
