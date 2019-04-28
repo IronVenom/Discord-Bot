@@ -96,7 +96,11 @@ async def on_message(message):
 		info = requests.get('https://api.nasa.gov/planetary/apod?api_key={}'.format(nasa_api)).text
 		date = eval(info)['date']
 		information = eval(info)['explanation']
-		url = eval(info)['hdurl']
+		url = None
+		try:
+			url = eval(info)['hdurl']
+		except KeyError:
+			url = eval(info)['url']
 		title = eval(info)['title']
 		msg = '**{}**\n'.format(title) + '**{}**\n'.format(date) + information 
 		await client.send_message(message.channel,msg)
