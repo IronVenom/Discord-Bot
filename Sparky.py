@@ -107,7 +107,14 @@ async def on_message(message):
 			await client.send_message(message.channel,embed = embed)
 		except KeyError:
 			url = eval(info)['url']
-			await client.send_message(message.channel,url)
+			if 'https:' in url:
+				embed = discord.Embed(title = 'Video/Image',description = url , color = discord.Color.blue())
+				await client.send_message(message.channel,embed = embed)
+			else:
+				url = 'https:'+url
+				embed = discord.Embed(title = 'Video/Image',description = url , color = discord.Color.blue())
+				await client.send_message(message.channel,embed = embed)
+		
 	
 	# Random Profile Pic command
 
