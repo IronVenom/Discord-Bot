@@ -89,6 +89,17 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 	
+	# The MEME COMMAND
+
+	if message.content.upper().startswith('MEME!'):
+
+		meme = eval(requests.get('https://meme-api.herokuapp.com/gimme').text)
+		name = meme['title']
+		url = meme['url']
+		embed = discord.Embed(title = name, color = discord.Color.magenta())
+		embed.set_image(url = url)
+		await client.send_message(message.channel,embed = embed)
+	
 	# Purge Command for a specific user.
 	
 	if message.content.upper().startswith('PURGEMEM!'):
@@ -709,6 +720,7 @@ async def on_message(message):
 		embed.add_field(name='dog!',value='Picture of a dog.', inline=False)
 		embed.add_field(name='fox!',value='Picture of a fox.', inline=False)
 		embed.add_field(name='mypic! query',value='Get a picture of a bot according to the query!', inline=False)
+		embed.add_field(name='meme!',value='Fresh memes from Reddit from the Dankmemes, memes, meirl and pewdiepie submissions subreddits.', inline=False)
 		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
