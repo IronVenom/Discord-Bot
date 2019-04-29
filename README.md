@@ -25,17 +25,4 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Meme_Api [https://github.com/R3l3ntl3ss/Meme_Api]
 * Yeerkee API
 
-### Features - 
-* Simple games
-* GIF search feature
-* Daily news feature
-* Wikipedia search feature
-* Basic server management commands
-* Basic server data visualization commands
-* Random jokes command
-* Language Translation command - translate languages from one to the other.
-* Calculator
-* Google Search ( Programming Doubts )
-* Urban Dictionary search command.
-* Tons of other commands.
-
+### Features - Will be updated soon.
