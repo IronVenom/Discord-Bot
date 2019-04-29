@@ -89,6 +89,14 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 	
+	# ASCII COW
+	
+	if message.content.upper().startswith('COW!'):
+
+		msg = ' '.join(message.content.split(' ')[1::])
+		string = '\n<|{}|>\n\t\\   ^__^ \n\t \\  (oo)\\_______\n\t    (__)\\       )\\/\\\n\t        ||----w |\n\t        ||     ||'.format(msg)
+		await client.send_message(message.channel,'```{}```'.format(string))
+	
 	# Fortune Cookie
 
 	if message.content.upper().startswith('FORTUNE!'):
@@ -731,6 +739,7 @@ async def on_message(message):
 		embed.add_field(name='meme!',value='Fresh memes from Reddit from the Dankmemes, memes, meirl and pewdiepie submissions subreddits.', inline=False)
 		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
 		embed.add_field(name='fortune!',value='Sparky\'s fortune cookies.', inline=False)
+		embed.add_field(name='cow! message',value='ASCII Cow speaks your message.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
