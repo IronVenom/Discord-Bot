@@ -89,6 +89,14 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 	
+	# Fortune Cookie
+
+	if message.content.upper().startswith('FORTUNE!'):
+
+		fortune = eval(requests.get('http://yerkee.com/api/fortune').text)['fortune']
+		embed = discord.Embed(title = 'Sparky\'s fortune cookies', description = fortune , color = discord.Color.dark_gold())
+		await client.send_message(message.channel,embed = embed)
+	
 	# The MEME COMMAND
 
 	if message.content.upper().startswith('MEME!'):
@@ -722,6 +730,7 @@ async def on_message(message):
 		embed.add_field(name='mypic! query',value='Get a picture of a bot according to the query!', inline=False)
 		embed.add_field(name='meme!',value='Fresh memes from Reddit from the Dankmemes, memes, meirl and pewdiepie submissions subreddits.', inline=False)
 		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
+		embed.add_field(name='fortune!',value='Sparky\'s fortune cookies.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
