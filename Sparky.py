@@ -191,10 +191,12 @@ async def on_message(message):
 			if 'https:' in url:
 				embed = discord.Embed(title = 'Video/Image',description = url , color = discord.Color.blue())
 				await client.send_message(message.channel,embed = embed)
+				await client.delete_message(message)
 			else:
 				url = 'https:'+url
 				embed = discord.Embed(title = 'Video/Image',description = url , color = discord.Color.blue())
 				await client.send_message(message.channel,embed = embed)
+				await client.delete_message(message)
 		
 	
 	# Random Profile Pic command
