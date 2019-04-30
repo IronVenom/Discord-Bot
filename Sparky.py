@@ -89,6 +89,38 @@ async def on_message(message):
 		await client.delete_message(help0)
 		await client.delete_message(message)
 	
+	# Pokedex Command
+
+	if message.content.upper().startswith('POKEDEX!'):
+
+		info = eval(requests.get('https://some-random-api.ml/pokedex?pokemon={}'.format(message.content.split(' ')[1])).text)
+		name = info['name']
+		typ = ', '.join(info['type'])
+		species = ', '.join(info['species'])
+		abilities = ' ,'.join(info['abilities'])
+		height = info['height']
+		weight = info['weight']
+		gender = ', '.join(info['gender'])
+		eg = ', '.join(info['egg_groups'])
+		stats = '\n'.join(['{} : {}'.format(i.upper(),j) for i,j in info['stats'].items()])
+		evol = '-->'.join(info['family']['evolutionLine'])
+		url = info['sprites']['normal']
+		des = info['description']
+
+		embed = discord.Embed(title = 'Pokedex : {}'.format(name.upper()),description = des,color = discord.Color.blue())
+		embed.add_field(name = 'Type',value = typ ,inline = True)
+		embed.add_field(name = 'Species',value = species ,inline = True)
+		embed.add_field(name = 'Abilities',value = abilities,inline = True)
+		embed.add_field(name = 'Height',value = height ,inline = True)
+		embed.add_field(name = 'Weight',value = weight ,inline = True)
+		embed.add_field(name = 'Gender',value = gender,inline = True)
+		embed.add_field(name = 'Egg Groups',value = eg ,inline = False)
+		embed.add_field(name = 'Evolution',value = evol ,inline = False)
+		embed.add_field(name = 'Statistics',value = stats,inline = False)
+		embed.set_thumbnail(url = url)
+
+		await client.send_message(message.channel,embed = embed)
+	
 	# ASCII COW
 	
 	if message.content.upper().startswith('COW!'):
@@ -740,6 +772,7 @@ async def on_message(message):
 		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
 		embed.add_field(name='fortune!',value='Sparky\'s fortune cookies.', inline=False)
 		embed.add_field(name='cow! message',value='ASCII Cow speaks your message.', inline=False)
+		embed.add_field(name='pokedex! name_of_pokemon',value='Sents pokedex info of a pokemon', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		#fun kill command removed.
 		
