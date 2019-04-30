@@ -26,4 +26,10 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * Yeerkee API
 * Pokedex API
 
-### Features - Will be updated soon.
+### Command Menu: To be updated soon
+
+#### Server Related Stuff:
+#### Utility Commands:
+#### Moderation Commands:
+#### Roles Commands:
+#### Entertainment Stuff:
