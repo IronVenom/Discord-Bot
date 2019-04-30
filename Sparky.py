@@ -186,6 +186,7 @@ async def on_message(message):
 			embed = discord.Embed(color = discord.Color.blue())
 			embed.set_image(url = url)
 			await client.send_message(message.channel,embed = embed)
+			await client.delete_message(message)
 		except KeyError:
 			url = eval(info)['url']
 			if 'https:' in url:
