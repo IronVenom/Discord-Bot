@@ -35,7 +35,7 @@ nasa_api = os.getenv('NASA_API')
 async def on_ready():
 	servers = client.servers
 	await client.change_presence(game=discord.Game(name='over {} servers'.format(len(servers)),type = 3))
-	print("Badum tss, I am ready!")
+	print("Bot initiated....")
   
 #Commands.
 @client.event
