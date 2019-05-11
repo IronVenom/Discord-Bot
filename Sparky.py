@@ -23,6 +23,7 @@ import operator
 import json
 import urbandict
 import lyricwikia
+import feedparser
 
 newsapi = NewsApiClient(api_key=os.getenv('API_KEY'))
 ia=imdb.IMDb()
@@ -89,7 +90,75 @@ async def on_message(message):
 		await client.delete_message(help9)
 		await client.delete_message(help0)
 		await client.delete_message(message)
+		
+	# Tech Articles
 	
+	if message.content.upper().startswith('ARTICLES!'):
+		
+		if message.author.id == os.getenv('OWNER') or message.author.id == os.getenv('BOT'):
+			
+			sec_news = feedparser.parse('https://techxplore.com/rss-feed/security-news/')
+			titles = [i['title'] for i in sec_news['entries'][:2]]
+			summary = [i['summary'] for i in sec_news['entries'][:2]]
+			link = [i['link'] for i in sec_news['entries'][:2]]
+			pic = [i['media_thumbnail'][0]['url'] for i in sec_news['entries'][:2]]
+			embed = discord.Embed(title = 'Cyber Security',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
+			embed.set_thumbnail(url = pic[0])
+			embed.set_footer(text='Powered by TechXplore')
+			sec = client.get_channel(os.getenv('SEC_ID'))
+			await client.send_message(sec,embed = embed)
+			embed = discord.Embed(title = 'Cyber Security',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
+			embed.set_thumbnail(url = pic[1])
+			embed.set_footer(text='Powered by TechXplore')
+			sec = client.get_channel(os.getenv('SEC_ID'))
+			await client.send_message(sec,embed = embed)
+
+			ml_news = feedparser.parse('https://techxplore.com/rss-feed/machine-learning-ai-news/')
+			titles = [i['title'] for i in ml_news['entries'][:2]]
+			summary = [i['summary'] for i in ml_news['entries'][:2]]
+			link = [i['link'] for i in ml_news['entries'][:2]]
+			pic = [i['media_thumbnail'][0]['url'] for i in ml_news['entries'][:2]]
+			embed = discord.Embed(title = 'Machine Learning',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
+			embed.set_thumbnail(url = pic[0])
+			embed.set_footer(text='Powered by TechXplore')
+			ml = client.get_channel(os.getenv('ML_ID'))
+			await client.send_message(ml,embed = embed)
+			embed = discord.Embed(title = 'Machine Learning',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
+			embed.set_thumbnail(url = pic[1])
+			embed.set_footer(text='Powered by TechXplore')
+			ml = client.get_channel(os.getenv('ML_ID'))
+			await client.send_message(ml,embed = embed)
+
+			rob_news = feedparser.parse('https://techxplore.com/rss-feed/robotics-news/')
+			titles = [i['title'] for i in rob_news['entries'][:2]]
+			summary = [i['summary'] for i in rob_news['entries'][:2]]
+			link = [i['link'] for i in rob_news['entries'][:2]]
+			pic = [i['media_thumbnail'][0]['url'] for i in rob_news['entries'][:2]]
+			embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
+			embed.set_thumbnail(url = pic[0])
+			embed.set_footer(text='Powered by TechXplore')
+			rb = client.get_channel(os.getenv('IOT_ID'))
+			await client.send_message(rb,embed = embed)
+			embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
+			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
+			embed.set_thumbnail(url = pic[1])
+			embed.set_footer(text='Powered by TechXplore')
+			rb = client.get_channel(os.getenv('IOT_ID'))
+			await client.send_message(rb,embed = embed)
+
+			await client.delete_message(message)
+			
+		else:
+			
+			embed = discord.Embed(title = 'WARNING',description='You are not allowed to use this command!',color = discord.Color.red())
+			await client.send_message(message.channel, embed=embed)
+			await client.delete_message(message)
+			
 	# Pokedex Command
 
 	if message.content.upper().startswith('POKEDEX!'):
@@ -796,6 +865,7 @@ async def on_message(message):
 			embed.add_field(name='kick! user',value='Kicks the mentioned user from the server.', inline=False)
 			embed.add_field(name='ban! user',value='Bans the mentioned user from the server.', inline=False)
 			embed.add_field(name='technews!',value='Release tech news.', inline=False)
+			embed.add_field(name='articles!',value='Release articles.', inline=False)
 			embed.add_field(name='warn! mention_member reason',value='Warns a member.', inline=False)
 			await client.send_message(message.channel,embed=embed)
 		else:
@@ -1431,17 +1501,17 @@ async def bump_server():
 		await asyncio.sleep(10800)
 
 # News
-async def news():
-	await client.wait_until_ready()
-	while not client.is_closed:
-		channel = client.get_channel(os.getenv('TECH_NEWS_ID'))
-		message1 = 'technews!'
-		message2 = 'nasa_apod!'
-		await client.send_message(channel,message1)
-		await client.send_message(channel,message2)
-		await asyncio.sleep(172800)
+# async def news():
+# 	await client.wait_until_ready()
+# 	while not client.is_closed:
+# 		channel = client.get_channel(os.getenv('TECH_NEWS_ID'))
+# 		message1 = 'technews!'
+# 		message2 = 'nasa_apod!'
+# 		await client.send_message(channel,message1)
+# 		await client.send_message(channel,message2)
+# 		await asyncio.sleep(172800)
 	
 		
 client.loop.create_task(bump_server())
-client.loop.create_task(news())
+# client.loop.create_task(news())
 client.run(os.getenv('TOKEN'))
