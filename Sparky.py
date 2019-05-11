@@ -1429,6 +1429,19 @@ async def bump_server():
 		message = '!d bump'
 		await client.send_message(channel,message)
 		await asyncio.sleep(10800)
+
+# News
+async def news():
+	await client.wait_until_ready()
+	while not client.is_closed:
+		channel = client.get_channel(os.getenv('TECH_NEWS_ID'))
+		message1 = 'technews!'
+		message2 = 'nasa_apod!'
+		await client.send_message(channel,message1)
+		await client.send_message(channel,message2)
+		await asyncio.sleep(172800)
+	
 		
 client.loop.create_task(bump_server())
+client.loop.create_task(news())
 client.run(os.getenv('TOKEN'))
