@@ -1197,7 +1197,7 @@ async def on_message(message):
 	# Tech News
 
 	if message.content.upper().startswith('TECHNEWS!'):
-		if message.author.id == os.getenv('OWNER'):
+		if message.author.id == os.getenv('OWNER') or message.author.id == os.getenv('BOT'):
 			th1=newsapi.get_top_headlines(q='technology',sources='ars-technica',language='en')
 			th2=newsapi.get_top_headlines(q='technology',sources='engadget',language='en')
 			th3=newsapi.get_top_headlines(q='technology',sources='hacker-news',language='en')
