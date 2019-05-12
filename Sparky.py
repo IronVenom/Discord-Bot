@@ -98,58 +98,46 @@ async def on_message(message):
 		if message.author.id == os.getenv('OWNER') or message.author.id == os.getenv('BOT'):
 			
 			sec_news = feedparser.parse('https://techxplore.com/rss-feed/security-news/')
-			titles = [i['title'] for i in sec_news['entries'][:2]]
-			summary = [i['summary'] for i in sec_news['entries'][:2]]
-			link = [i['link'] for i in sec_news['entries'][:2]]
-			pic = [i['media_thumbnail'][0]['url'] for i in sec_news['entries'][:2]]
-			embed = discord.Embed(title = 'Cyber Security',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
-			embed.set_thumbnail(url = pic[0])
-			embed.set_footer(text='Powered by TechXplore')
-			sec = client.get_channel(os.getenv('SEC_ID'))
-			await client.send_message(sec,embed = embed)
-			embed = discord.Embed(title = 'Cyber Security',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
-			embed.set_thumbnail(url = pic[1])
-			embed.set_footer(text='Powered by TechXplore')
-			sec = client.get_channel(os.getenv('SEC_ID'))
-			await client.send_message(sec,embed = embed)
+			titles = [i['title'] for i in sec_news['entries'][:5]]
+			summary = [i['summary'] for i in sec_news['entries'][:5]]
+			link = [i['link'] for i in sec_news['entries'][:5]]
+			pic = [i['media_thumbnail'][0]['url'] for i in sec_news['entries'][:5]]
+			for i in range(0,5):
+				
+				embed = discord.Embed(title = 'Cyber Security',description = 'Article',color = discord.Color.blue())
+				embed.add_field(name = titles[i],value = '{}\n{}'.format(summary[i],link[i]),inline = False)
+				embed.set_thumbnail(url = pic[i])
+				embed.set_footer(text='Powered by TechXplore')
+				sec = client.get_channel(os.getenv('SEC_ID'))
+				await client.send_message(sec,embed = embed)
 
 			ml_news = feedparser.parse('https://techxplore.com/rss-feed/machine-learning-ai-news/')
-			titles = [i['title'] for i in ml_news['entries'][:2]]
-			summary = [i['summary'] for i in ml_news['entries'][:2]]
-			link = [i['link'] for i in ml_news['entries'][:2]]
-			pic = [i['media_thumbnail'][0]['url'] for i in ml_news['entries'][:2]]
-			embed = discord.Embed(title = 'Machine Learning',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
-			embed.set_thumbnail(url = pic[0])
-			embed.set_footer(text='Powered by TechXplore')
-			ml = client.get_channel(os.getenv('ML_ID'))
-			await client.send_message(ml,embed = embed)
-			embed = discord.Embed(title = 'Machine Learning',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
-			embed.set_thumbnail(url = pic[1])
-			embed.set_footer(text='Powered by TechXplore')
-			ml = client.get_channel(os.getenv('ML_ID'))
-			await client.send_message(ml,embed = embed)
+			titles = [i['title'] for i in ml_news['entries'][:5]]
+			summary = [i['summary'] for i in ml_news['entries'][:5]]
+			link = [i['link'] for i in ml_news['entries'][:5]]
+			pic = [i['media_thumbnail'][0]['url'] for i in ml_news['entries'][:5]]
+			for i in range(0,5):
+				
+				embed = discord.Embed(title = 'Machine Learning',description = 'Article',color = discord.Color.blue())
+				embed.add_field(name = titles[i],value = '{}\n{}'.format(summary[i],link[i]),inline = False)
+				embed.set_thumbnail(url = pic[i])
+				embed.set_footer(text='Powered by TechXplore')
+				ml = client.get_channel(os.getenv('ML_ID'))
+				await client.send_message(ml,embed = embed)
 
 			rob_news = feedparser.parse('https://techxplore.com/rss-feed/robotics-news/')
-			titles = [i['title'] for i in rob_news['entries'][:2]]
-			summary = [i['summary'] for i in rob_news['entries'][:2]]
-			link = [i['link'] for i in rob_news['entries'][:2]]
-			pic = [i['media_thumbnail'][0]['url'] for i in rob_news['entries'][:2]]
-			embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[0],value = '{}\n{}'.format(summary[0],link[0]),inline = False)
-			embed.set_thumbnail(url = pic[0])
-			embed.set_footer(text='Powered by TechXplore')
-			rb = client.get_channel(os.getenv('IOT_ID'))
-			await client.send_message(rb,embed = embed)
-			embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
-			embed.add_field(name = titles[1],value = '{}\n{}'.format(summary[1],link[1]),inline = False)
-			embed.set_thumbnail(url = pic[1])
-			embed.set_footer(text='Powered by TechXplore')
-			rb = client.get_channel(os.getenv('IOT_ID'))
-			await client.send_message(rb,embed = embed)
+			titles = [i['title'] for i in rob_news['entries'][:5]]
+			summary = [i['summary'] for i in rob_news['entries'][:5]]
+			link = [i['link'] for i in rob_news['entries'][:5]]
+			pic = [i['media_thumbnail'][0]['url'] for i in rob_news['entries'][:5]]
+			for i in range(0,5):
+				
+				embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
+				embed.add_field(name = titles[i],value = '{}\n{}'.format(summary[i],link[i]),inline = False)
+				embed.set_thumbnail(url = pic[i])
+				embed.set_footer(text='Powered by TechXplore')
+				rb = client.get_channel(os.getenv('IOT_ID'))
+				await client.send_message(rb,embed = embed)
 
 			await client.delete_message(message)
 			
