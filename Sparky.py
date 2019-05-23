@@ -192,7 +192,7 @@ async def on_message(message):
 	if message.content.upper().startswith('FORTUNE!'):
 
 		fortune = eval(requests.get('http://yerkee.com/api/fortune').text)['fortune']
-		embed = discord.Embed(title = 'Sparky\'s fortune cookies', description = fortune , color = discord.Color.dark_gold())
+		embed = discord.Embed(title = 'Cerberus\'s fortune cookies', description = fortune , color = discord.Color.dark_gold())
 		await client.send_message(message.channel,embed = embed)
 	
 	# The MEME COMMAND
@@ -334,7 +334,7 @@ async def on_message(message):
 		title = eval(requests.get(string).text)['results'][0]['title']
 		ingredients = eval(requests.get(string).text)['results'][0]['ingredients']
 		link = ''.join(eval(requests.get(string).text)['results'][0]['href'].split('\\'))
-		embed = discord.Embed(title = 'Chef Sparky, Recipe for {}'.format(item.upper()),description = 'Mamma Mia!',color = discord.Color.blue())
+		embed = discord.Embed(title = 'Chef Cerberus, Recipe for {}'.format(item.upper()),description = 'Mamma Mia!',color = discord.Color.blue())
 		embed.add_field(name = 'Title',value = title,inline = False)
 		embed.add_field(name = 'Ingredients',value = ingredients,inline = False)
 		embed.add_field(name = 'Link for Recipe',value = link,inline = False)
@@ -373,7 +373,7 @@ async def on_message(message):
 	if message.content.upper().startswith('ADVICE!'):
 
 		advice = eval(requests.get('https://api.adviceslip.com/advice').text)['slip']['advice']
-		embed = discord.Embed(title = 'Dr Sparky gives the following advice-',description=advice,color = discord.Color.dark_green())
+		embed = discord.Embed(title = 'Dr Cerberus gives the following advice-',description=advice,color = discord.Color.dark_green())
 		await client.send_message(message.channel,embed = embed)
 
 	# Boredom Command 
@@ -389,7 +389,7 @@ async def on_message(message):
 	if message.content.upper().startswith('QUOTE!'):
 
 		quote = eval(requests.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1').text)[0]['content'].split('<p>')[1].split('<\\/p>')[0]
-		embed = discord.Embed(title = 'Sparky says...', description = quote, color = discord.Color.magenta())
+		embed = discord.Embed(title = 'Cerberus says...', description = quote, color = discord.Color.magenta())
 		await client.send_message(message.channel,embed = embed)
 		
 	# Warn a Member
@@ -759,7 +759,7 @@ async def on_message(message):
 	#Bot Commands Help
 	
 	if message.content.upper().startswith('HELP!'):
-		embed=discord.Embed(title='SPARKY TO YOUR RESCUE!',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.teal())
+		embed=discord.Embed(title='Cerberus TO YOUR RESCUE!',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.teal())
 		embed.add_field(name='help!',value='Gives this list',inline=False)
 		embed.add_field(name='psrules!',value='Rules of Practice Sessions',inline=False)
 		embed.add_field(name='modhelp!',value='Moderation Commands',inline=False)
@@ -800,8 +800,8 @@ async def on_message(message):
 		embed.add_field(name='info!',value='Gives server info.',inline=False)
 		embed.add_field(name='profile!',value='Check out your profile card.',inline=False)
 		embed.add_field(name='profile mention member!',value='Check out profile card of any member.',inline=False)
-		embed.add_field(name='ping!',value='Ping Sparky.',inline=False)
-		embed.add_field(name='menu!',value='To get the entire list of Sparky\'s commands.',inline=False)
+		embed.add_field(name='ping!',value='Ping Cerberus.',inline=False)
+		embed.add_field(name='menu!',value='To get the entire list of Cerberus\'s commands.',inline=False)
 		embed.add_field(name='suggest! suggestion',value='Create a suggestion for the server',inline=False)
 # 		embed.add_field(name='leaderboard!',value='Check the leaderboard.',inline=False)
 		await client.send_message(message.channel,embed=embed)
@@ -811,33 +811,33 @@ async def on_message(message):
 	if message.content.upper().startswith('FUNHELP!'):
 		embed=discord.Embed(title='Fun Commands',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.magenta())
 		embed.add_field(name='wiki! query',value='Gives brief summary from Wikipedia of the queried item',inline=False)
-		embed.add_field(name='coin! type heads or tails',value='Make Sparky toss a coin and see if you win',inline=False)
-		embed.add_field(name='slot!',value='Test your luck on Sparky\'s slot machine!',inline=False)
+		embed.add_field(name='coin! type heads or tails',value='Make Cerberus toss a coin and see if you win',inline=False)
+		embed.add_field(name='slot!',value='Test your luck on Cerberus\'s slot machine!',inline=False)
 		embed.add_field(name='joke!',value='Cheeky and nerdy Chuck Norris jokes',inline=False)
 		embed.add_field(name='movie! name of Movie / TV Series /  Video Game',value='Gives the plot summary of the Movie/ TV series / Video Game',inline=False)
-		embed.add_field(name='hello! / yo! / wazz poppin!',value='Sparky says hi to you', inline=False)
+		embed.add_field(name='hello! / yo! / wazz poppin!',value='Cerberus says hi to you', inline=False)
 		embed.add_field(name='cookie! mention user',value='Give someone a delicious cookie', inline=False)
-# 		embed.add_field(name='sparkygif! gif topic',value='Posts a GIF on the mentioned topic', inline=False)
+# 		embed.add_field(name='Cerberusgif! gif topic',value='Posts a GIF on the mentioned topic', inline=False)
 		embed.add_field(name='poll! item1-without-spaces item2-without-spaces',value='Creates a 2 item poll', inline=False)
-		embed.add_field(name='trivia!',value='Answer Sparky\'s CS trivia questions!', inline=False)
-		embed.add_field(name='fight! mention user you want to fight',value='Get into Sparky\'s Arena and fight!', inline=False)
+		embed.add_field(name='trivia!',value='Answer Cerberus\'s CS trivia questions!', inline=False)
+		embed.add_field(name='fight! mention user you want to fight',value='Get into Cerberus\'s Arena and fight!', inline=False)
 		embed.add_field(name='urban! word to be searched',value='Check out the urban dictionary for the meaning of a word.', inline=False)
-		embed.add_field(name='bored!',value='Ask Sparky what to do if you are bored.', inline=False)
+		embed.add_field(name='bored!',value='Ask Cerberus what to do if you are bored.', inline=False)
 		embed.add_field(name='quote!',value='Get motivated by motivational quotes.', inline=False)
-		embed.add_field(name='advice!',value='Get friendly advice from Dr Sparky.', inline=False)
+		embed.add_field(name='advice!',value='Get friendly advice from Dr Cerberus.', inline=False)
 		embed.add_field(name='lyrics!(space)artist name+song name',value='Lyrics of a song. Note that there is a space after lyrics!, and that artist name and song name have a plus sign in between them. There is no space between artist name and song name, only a plus sign.', inline=False)
 		embed.add_field(name='cat!',value='Picture of a cute cat.', inline=False)
 		embed.add_field(name='math!',value='Random fun fact of about the universal languauge - Mathematics.', inline=False)
 		await client.send_message(message.channel,embed=embed)
 		embed=discord.Embed(title='Fun Commands 2',description='COMMANDS [Note that the commands are case insensitive.] -->',colour=discord.Colour.blue())
-		embed.add_field(name='recipe! query',value='Get advice from Sparky on how to cook your favorite dish.',inline=False)
+		embed.add_field(name='recipe! query',value='Get advice from Cerberus on how to cook your favorite dish.',inline=False)
 		embed.add_field(name='xkcd_comic! issue_number',value='The issue number must be an integer. See your favorite xkcd comics!',inline=False)
 		embed.add_field(name='dog!',value='Picture of a dog.', inline=False)
 		embed.add_field(name='fox!',value='Picture of a fox.', inline=False)
 		embed.add_field(name='mypic! query',value='Get a picture of a bot according to the query!', inline=False)
 		embed.add_field(name='meme!',value='Fresh memes from Reddit from the Dankmemes, memes, meirl and pewdiepie submissions subreddits.', inline=False)
 		embed.add_field(name='nasa_apod!',value='Nasa\'s Daily Astronomy Photo.', inline=False)
-		embed.add_field(name='fortune!',value='Sparky\'s fortune cookies.', inline=False)
+		embed.add_field(name='fortune!',value='Cerberus\'s fortune cookies.', inline=False)
 		embed.add_field(name='cow! message',value='ASCII Cow speaks your message.', inline=False)
 		embed.add_field(name='pokedex! name_of_pokemon',value='Sents pokedex info of a pokemon', inline=False)
 		await client.send_message(message.channel,embed=embed)
@@ -1036,7 +1036,7 @@ async def on_message(message):
 				
 # 	#GIFs
 
-# 	if message.content.upper().startswith('SPARKYGIF!'):
+# 	if message.content.upper().startswith('CerberusGIF!'):
 # 		g = safygiphy.Giphy()
 # 		target = message.content.split(' ')[1]
 # 		gif = g.random(tag=target)['data']['url']
@@ -1105,7 +1105,7 @@ async def on_message(message):
 		args = ' '.join(message.content.split(' ')[2::])
 		lang = message.content.split(' ')[1]
 		translations = translator.translate(args, dest=lang)
-		embed = discord.Embed(title='SPARKY TRANSLATE',description='Sparky Translates for you!',colour=discord.Colour.teal())
+		embed = discord.Embed(title='Cerberus TRANSLATE',description='Cerberus Translates for you!',colour=discord.Colour.teal())
 		embed.add_field(name='Original Message:',value=args,inline='False')
 		embed.add_field(name='Translated Message:',value=translations.text,inline='False')
 		await client.send_message(message.channel,embed=embed)
@@ -1122,7 +1122,7 @@ async def on_message(message):
 			await client.send_message(message.channel,embed=embed)
 
 	if message.content.upper().startswith('TRANSLATEHELP!'):
-		embed = discord.Embed(title='Sparky Translation Help',description='Commands',colour=discord.Colour.teal())
+		embed = discord.Embed(title='Cerberus Translation Help',description='Commands',colour=discord.Colour.teal())
 		embed.add_field(name='translatelangs! language',value='Gives the code of the language asked',inline='False')
 		embed.add_field(name='translate! languagecode message to be translated',value='Translates the given message into the selected language.',inline='False')
 		await client.send_message(message.channel,embed=embed)
@@ -1157,12 +1157,12 @@ async def on_message(message):
 			res = eval(s)
 		else:
 			res = 'Wrong Command!'
-		embed = discord.Embed(title='Sparky\'s Calculator',description='Answer',colour=discord.Colour.orange())
+		embed = discord.Embed(title='Cerberus\'s Calculator',description='Answer',colour=discord.Colour.orange())
 		embed.add_field(name=' '.join(args[1:]),value=res,inline='False')
 		await client.send_message(message.channel,embed=embed)
 
 	if message.content.upper().startswith('CALCHELP!'):
-		embed=discord.Embed(title='Sparky\'s Calculator',description='Quick Maths',colour=discord.Colour.orange())
+		embed=discord.Embed(title='Cerberus\'s Calculator',description='Quick Maths',colour=discord.Colour.orange())
 		embed.add_field(name='calc! sin/cos/tan angle',value='Sine/Cosine/Tangent of the given angle',inline='False')
 		embed.add_field(name='calc! exp number',value='Exp(number)',inline='False')
 		embed.add_field(name='calc! log value base',value='Log of value to the given base',inline='False')
@@ -1213,7 +1213,7 @@ async def on_message(message):
 		incorrect_answers.append(cor_ans)
 		answers_lis = incorrect_answers
 		random.shuffle(answers_lis)
-		embed = discord.Embed(title="CS TRIVIA by Sparky",description="Type a number between 1 and 4 to choose your answer.",colour=discord.Color.dark_teal())
+		embed = discord.Embed(title="CS TRIVIA by Cerberus",description="Type a number between 1 and 4 to choose your answer.",colour=discord.Color.dark_teal())
 		embed.add_field(name='Question',value = question,inline = False)
 		embed.add_field(name=':one:',value = answers_lis[0],inline = False)
 		embed.add_field(name=':two:',value = answers_lis[1],inline = False)
@@ -1241,7 +1241,7 @@ async def on_message(message):
 		"ate ice cream and threw the empty cone at","used the elder wand and cursed","used a dead meme against","said meep and ran away from"]
 		person_1 = message.author.mention
 		person_2 = message.content.split(' ')[1]
-		embed = discord.Embed(title='SPARKY\'S ARENA',description="Let the fight begin!",color=discord.Color.blue())
+		embed = discord.Embed(title='Cerberus\'S ARENA',description="Let the fight begin!",color=discord.Color.blue())
 		for i in range(1,turns):
 			if i%2 == 0:
 				embed.add_field(name='Round {}'.format(i),value="{} {} {}".format(person_2,random.choice(fights),person_1),inline = False)
@@ -1465,7 +1465,7 @@ async def on_member_remove(member):
 # 		if (len(th62['articles'])!=0):
 # 			s.append(th62['articles'][0]['url'])
 # 		headlines=list(set(s))
-# 		embed=discord.Embed(title='Tech News',description='Tech News of the Week, brought to you by Sparky.',colour=discord.Colour.teal())
+# 		embed=discord.Embed(title='Tech News',description='Tech News of the Week, brought to you by Cerberus.',colour=discord.Colour.teal())
 # 		embed.set_footer(text='Powered by NewsAPI')
 # 		technews = client.get_channel(os.getenv('TECH_NEWS_ID'))
 # 		if(len(headlines)!=0):
