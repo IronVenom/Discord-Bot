@@ -419,7 +419,7 @@ async def on_message(message):
 			arg = ' '.join(message.content.split(' ')[1:])
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY' or arg.upper() == 'PRACTICE SESSIONS':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.add_roles(message.author,role)
@@ -444,7 +444,7 @@ async def on_message(message):
 			arg = ' '.join(message.content.split(' ')[1:])
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY':
+			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY' or arg.upper() == 'PRACTICE SESSIONS'::
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.remove_roles(message.author,role)
@@ -464,7 +464,7 @@ async def on_message(message):
 
 	if message.content.upper().startswith('TPHELP!'):
 
-		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security',colour=discord.Colour.purple())
+		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security/Practice Sessions',colour=discord.Colour.purple())
 		embed.add_field(name='topicrole! name of role from above 4',value='Adds the role',inline=False)
 		embed.add_field(name='topicroleremove! removes role from above 4',value='Removes the role',inline=False)
 		embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicroleremove! machine learning\nAlso note that the commands are case insensitive.',inline = False)
