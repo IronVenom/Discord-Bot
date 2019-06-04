@@ -872,7 +872,7 @@ async def on_message(message):
 			if role.name.upper() == 'CODERS':
 				role_id_list.append(role.mention)
 		embed = discord.Embed(title='Practice Session Rules',description='To be followed by everyone who is participating',colour=discord.Colour.red())
-		embed.add_field(name='Rule-1',value='Post your solutions in {} using appropriate discord markdown.'.format(channel_CP),inline='False')
+		embed.add_field(name='Rule-1',value='Post your solutions in the practice sessions channel using appropriate discord markdown.',inline='False')
 		embed.add_field(name='Rule-2',value='If you have a doubt, ping anyone of the support staff mentioned below. Don\'t ping the entire role',inline='False')
 		embed.add_field(name='Rule-3',value='Try to make your code as efficient as possible. If you don\'t know about efficiency, leave this point.',inline='False')
 		embed.add_field(name='Rule-4',value='Do not cheat or copy.',inline='False')
