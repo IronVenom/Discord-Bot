@@ -444,7 +444,7 @@ async def on_message(message):
 			arg = ' '.join(message.content.split(' ')[1:])
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY' or arg.upper() == 'PRACTICE SESSIONS'::
+			if arg.upper() == 'MACHINE LEARNING' or arg.upper() == 'ARTIFICIAL INTELLIGENCE' or arg.upper() == 'INTERNET OF THINGS' or arg.upper() == 'CYBER SECURITY' or arg.upper() == 'PRACTICE SESSIONS':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.remove_roles(message.author,role)
