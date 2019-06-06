@@ -1389,16 +1389,15 @@ async def on_message(message):
 @client.event
 async def on_member_join(member):
 	
-	server = member.server.name
-	if server == 'Stark Tower':
-		server=client.get_server(os.getenv('SERVER_ID'))
-		userid=member.mention
-		channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
-		channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
-		language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
-		topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
-		msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
-		await client.send_message(channel,msg)
+	
+	server=client.get_server(os.getenv('SERVER_ID'))
+	userid=member.mention
+	channel = client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
+	channel_rules=client.get_channel(os.getenv('RULES_CHANNEL_ID'))
+	language_role_channel = client.get_channel(os.getenv('LANG_ROLE_ID'))
+	topic_role_channel = client.get_channel(os.getenv('TOPIC_ROLE_CHANNEL_ID'))
+	msg='Welcome to {} {}! Please look at {} before proceeding, and assign yourself language roles in {} and topic roles in {}, and for help type lrhelp! and tphelp! in the respective channels. Have fun!'.format(server.name,userid,channel_rules.mention,language_role_channel.mention,topic_role_channel.mention)
+	await client.send_message(channel,msg)
 
 	# 	# Creating an user account for exp system.
 
@@ -1415,12 +1414,11 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
 	
-	server = member.server.name
-	if server == 'Stark Tower':
-		userid=member.mention
-		channel=client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
-		msg='Farewell {}! Best of luck for the future!'.format(userid)
-		await client.send_message(channel,msg)
+
+	userid=member.mention
+	channel=client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
+	msg='Farewell {}! Best of luck for the future!'.format(userid)
+	await client.send_message(channel,msg)
 
 # #Tech News.
 
