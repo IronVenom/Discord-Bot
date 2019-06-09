@@ -467,7 +467,7 @@ async def on_message(message):
 		embed = discord.Embed(title='Topic Based Roles Help',description='Machine Learning/ Artificial Intelligence/ Internet of Things/ Cyber Security/Practice Sessions',colour=discord.Colour.purple())
 		embed.add_field(name='topicrole! name of role from above',value='Adds the role',inline=False)
 		embed.add_field(name='topicroleremove! removes role from above',value='Removes the role',inline=False)
-		embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicroleremove! machine learning\nAlso note that the commands are case insensitive.\nIf you want to get notified when a practice session starts, do get the Practice Sessions role.',inline = False)
+		embed.add_field(name='Example',value = 'topicrole! machine learning\ntopicroleremove! machine learning\nAlso note that the commands are case insensitive.\n\nNOTE: If you want to get notified when a practice session starts, do get the Practice Sessions role.',inline = False)
 		await client.send_message(message.channel,embed=embed)
 		
 	# Urban Dictionary
