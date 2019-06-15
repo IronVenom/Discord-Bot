@@ -1415,7 +1415,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
 	
 
-	userid=member.mention
+	userid=member.name
 	channel=client.get_channel(os.getenv('INTRO_CHANNEL_ID'))
 	msg='Farewell {}! Best of luck for the future!'.format(userid)
 	await client.send_message(channel,msg)
