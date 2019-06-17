@@ -1,5 +1,5 @@
 # Discord Bot
-A Discord Bot made using Python and Discordpy as a pet project. It's a complete server bot.
+A Discord Bot made using Python and Discordpy as a pet project. It's a complete server bot hosted on heroku.
 
 ### External APIs used -
 * IMDBpy
