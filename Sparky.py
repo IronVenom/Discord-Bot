@@ -209,23 +209,29 @@ async def on_message(message):
 	# Purge Command for a specific user.
 	
 	if message.content.upper().startswith('PURGEMEM!'):
-
-		server=message.server
-		mem_list = server.members
-		logs = client.get_channel(os.getenv('LOGS'))
-		mems = message.content.split(' ')[1]
-		key = int(message.content.split(' ')[2])
-		args = key
-		async for message in client.logs_from(message.channel,limit = 10000000000000000000000000000000000000000000000000000000000000000000000000000000, before = datetime.now()):
-			if message.author.mention == mems:
-				if key != 0:
-					await client.delete_message(message)
-					key-=1
-			if key == 0:
-				break
-		msg = 'Deleted {} messsages from {} sent by {}'.format(args,message.channel.mention,mems)
-		embed = discord.Embed(title = 'Purge',description = msg , color = discord.Color.blue())
-		await client.send_message(logs,embed = embed)
+		flag=False
+		if message.author.server_permissions.kick_members == True and message.author.server_permissions.ban_members ==  True:
+			flag=True
+		if flag == True:
+			server=message.server
+			mem_list = server.members
+			logs = client.get_channel(os.getenv('LOGS'))
+			mems = message.content.split(' ')[1]
+			key = int(message.content.split(' ')[2])
+			args = key
+			async for message in client.logs_from(message.channel,limit = 10000000000000000000000000000000000000000000000000000000000000000000000000000000, before = datetime.now()):
+				if message.author.mention == mems:
+					if key != 0:
+						await client.delete_message(message)
+						key-=1
+				if key == 0:
+					break
+			msg = 'Deleted {} messsages from {} sent by {}'.format(args,message.channel.mention,mems)
+			embed = discord.Embed(title = 'Purge',description = msg , color = discord.Color.blue())
+			await client.send_message(logs,embed = embed)
+		else:
+			embed = discord.Embed(title="Warning!",description='You are not allowed to use this command',colour=discord.Colour.red())
+			await client.send_message(message.channel,embed=embed)
 
 		
 	# Nasa's Picture of the Day 
