@@ -264,7 +264,7 @@ async def on_message(message):
 				await client.delete_message(message)
 	
 	# Random Spam
-	if (("nude" in message.content.split(' ')) or ("naked" in message.content.split(' '))):
+	if (("nude" in message.content) or ("naked" in message.content)):
 		await client.delete_message(message)
 		
 	
