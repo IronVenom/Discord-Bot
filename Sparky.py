@@ -505,7 +505,7 @@ async def on_message(message):
 		args = ' '.join(message.content.split(' ')[1:])
 		name = message.author.name
 		timemsg = message.timestamp
-		embed = discord.Embed(title='Lucifer\'s Dropbox',description='Suggestion created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
+		embed = discord.Embed(title='Server Dropbox',description='Suggestion created by {}'.format(message.author.mention),color = discord.Color.dark_blue())
 		embed.add_field(name='Time of creation:',value='{}-{}-{}'.format(timemsg.day,timemsg.month,timemsg.year),inline= False)
 		embed.add_field(name='Suggestion',value=args,inline= False)
 		suggestion_channel = client.get_channel(os.getenv('SUGGEST_CHANNEL_ID'))
