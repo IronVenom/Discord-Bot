@@ -125,20 +125,6 @@ async def on_message(message):
 				ml = client.get_channel(os.getenv('ML_ID'))
 				await client.send_message(ml,embed = embed)
 
-			rob_news = feedparser.parse('https://techxplore.com/rss-feed/robotics-news/')
-			titles = [i['title'] for i in rob_news['entries'][:5]]
-			summary = [i['summary'] for i in rob_news['entries'][:5]]
-			link = [i['link'] for i in rob_news['entries'][:5]]
-			pic = [i['media_thumbnail'][0]['url'] for i in rob_news['entries'][:5]]
-			for i in range(0,5):
-				
-				embed = discord.Embed(title = 'IOT and Robotics',description = 'Article',color = discord.Color.blue())
-				embed.add_field(name = titles[i],value = '{}\n{}'.format(summary[i],link[i]),inline = False)
-				embed.set_thumbnail(url = pic[i])
-				embed.set_footer(text='Powered by TechXplore')
-				rb = client.get_channel(os.getenv('IOT_ID'))
-				await client.send_message(rb,embed = embed)
-
 			await client.delete_message(message)
 			
 		else:
