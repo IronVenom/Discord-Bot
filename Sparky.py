@@ -31,6 +31,8 @@ Client = discord.Client()
 client = commands.Bot(command_prefix="!")
 translator = Translator()
 nasa_api = os.getenv('NASA_API')
+r = requests.get('http://www.bannedwordlist.com/lists/swearWords.xml')
+bad_words = ''.join(r.text.split('\r\n\t<word>')).split('</word>')[1:-1]
 
 @client.event
 async def on_ready():
@@ -63,7 +65,17 @@ async def on_message(message):
 # 		msg = '{} {}'.format(di,random.choice(kills))
 # 		embed = discord.Embed(title = 'The Kill command',description=msg,color = discord.Color.blue())
 # 		await client.send_message(message.channel,embed = embed)
+
+	# Profanity Filter
 	
+	l = message.content.split()
+	for i in l:
+		if i in bad_words:
+			embed = discord.Embed(title = 'Warning',description = '{} has been warned for using bad words.'.format(message.author.mention),color = discord.Color.red())
+			await client.send_message(message.channel,embed = embed)
+			await client.delete_message(message)
+			break
+			
 	# Mega Menu
 
 	if message.content.upper().startswith('MENU!'):
