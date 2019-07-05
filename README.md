@@ -29,3 +29,6 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 ### RSS Feeds -
 * TechXplore
 
+### XML Feeds -
+* www.bannedwordlist.com
+
