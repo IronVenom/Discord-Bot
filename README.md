@@ -30,4 +30,4 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 * TechXplore
 
 ### XML Feeds -
-* www.bannedwordlist.com
+* www.bannedwordlist.com : Used to create the profanity filter.
