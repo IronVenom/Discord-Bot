@@ -31,4 +31,3 @@ A Discord Bot made using Python and Discordpy as a pet project. It's a complete 
 
 ### XML Feeds -
 * www.bannedwordlist.com
-
