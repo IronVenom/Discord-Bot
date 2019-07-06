@@ -661,7 +661,7 @@ async def on_message(message):
 		plt.savefig('stats.png')
 		await client.send_file(message.channel,'stats.png')
 		plt.clf()
-		embed = discord.Embed(title = 'Status',description = 'Stark Tower' , color = discord.Color.blue())
+		embed = discord.Embed(title = 'Status',description = server.name , color = discord.Color.blue())
 		embed.add_field(name = 'Online',value = online,inline = False)
 		embed.add_field(name = 'Offline',value = offline,inline = False)
 		embed.add_field(name = 'Idle',value = idle,inline = False)
