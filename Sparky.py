@@ -875,9 +875,7 @@ async def on_message(message):
 		channel_CP = client.get_channel(os.getenv('CP_CHANNEL_ID'))
 		role_id_list=[]
 		for role in message.server.roles:
-			if role.name.upper() == 'PROGRAMMERS':
-				role_id_list.append(role.mention)
-			if role.name.upper() == 'CODERS':
+			if role.name.upper() == 'HELP STAFF':
 				role_id_list.append(role.mention)
 		embed = discord.Embed(title='Practice Session Rules',description='To be followed by everyone who is participating',colour=discord.Colour.red())
 		embed.add_field(name='Rule-1',value='Post your solutions in the practice sessions channel using appropriate discord markdown.',inline='False')
@@ -887,7 +885,7 @@ async def on_message(message):
 		embed.add_field(name='Rule-5',value='Use logic along with the in-built functions to get the most output.',inline='False')
 		embed.add_field(name='Rule-6',value='Use C++ / C /Python / Java. If you feel excited, use Haskell or Erlang at your own risk.',inline='False')
 		embed.add_field(name='Link for Discord Markup',value='https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-',inline='False')
-		embed.add_field(name='Support Staff',value=role_id_list[0]+'\n'+role_id_list[1],inline='False')
+		embed.add_field(name='Support Staff',value=role_id_list[0],inline='False')
 		await client.send_message(message.channel,embed=embed)
 			
 	#PING
