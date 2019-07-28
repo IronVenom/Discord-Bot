@@ -999,7 +999,7 @@ async def on_message(message):
 			arg = message.content.split(' ')[1]
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#':
+			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#' or arg.upper() == 'PHP' or arg.upper() == 'MATLAB' or arg.upper() == 'UNITY' or arg.upper == 'AUTOIT':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.add_roles(message.author,role)
