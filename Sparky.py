@@ -1493,15 +1493,15 @@ async def bump_server():
 		await asyncio.sleep(10800)
 
 		
-#MEMES 
-async def memes():
-	await client.wait_until_ready()
-	while not client.is_closed:
-		channel=client.get_channel(os.getenv('MEME_ID'))
-		message = 'meme!'
-		memez = await client.send_message(channel,message)
-		await client.delete_message(memez)
-		await asyncio.sleep(1800)
+# #MEMES 
+# async def memes():
+# 	await client.wait_until_ready()
+# 	while not client.is_closed:
+# 		channel=client.get_channel(os.getenv('MEME_ID'))
+# 		message = 'meme!'
+# 		memez = await client.send_message(channel,message)
+# 		await client.delete_message(memez)
+# 		await asyncio.sleep(1800)
 # News
 # async def news():
 # 	await client.wait_until_ready()
@@ -1515,6 +1515,6 @@ async def memes():
 	
 		
 client.loop.create_task(bump_server())
-client.loop.create_task(memes())
+# client.loop.create_task(memes())
 # client.loop.create_task(news())
 client.run(os.getenv('TOKEN'))
