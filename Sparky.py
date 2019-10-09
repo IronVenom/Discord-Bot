@@ -260,10 +260,6 @@ async def on_message(message):
 				embed = discord.Embed(title = 'Video/Image',description = url , color = discord.Color.blue())
 				await client.send_message(message.channel,embed = embed)
 				await client.delete_message(message)
-	
-	# Random Spam
-	if (("nude" in message.content) or ("naked" in message.content)):
-		await client.delete_message(message)
 		
 	
 	# Random Profile Pic command
