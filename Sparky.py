@@ -972,7 +972,7 @@ async def on_message(message):
 
 	if message.content.upper().startswith('LRHELP!'):
 		
-		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python/C#/JavaScript/HTML-CSS/Rust/Erlang/Haskell/SQL/Assembly/Verilog-VHDL/PHP/MATLAB/Unity/Autoit',colour=discord.Colour.purple())
+		embed = discord.Embed(title='Language Based Roles Help',description='C/C++/Java/Python/C#/JavaScript/HTML-CSS/Rust/Erlang/Haskell/SQL/Assembly/Verilog-VHDL/PHP/MATLAB/Unity/Autoit/R/Go/Lua',colour=discord.Colour.purple())
 		embed.add_field(name='langrole! name of role from above',value='Adds the role',inline=False)
 		embed.add_field(name='langroleremove! removes role from above',value='Removes the role',inline=False)
 		embed.add_field(name='Example',value = 'langrole! Python\nlangroleremove! Python\nAlso note that the commands are case insensitive.',inline = False)
@@ -987,7 +987,7 @@ async def on_message(message):
 			arg = message.content.split(' ')[1]
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#' or arg.upper() == 'PHP' or arg.upper() == 'MATLAB' or arg.upper() == 'UNITY' or arg.upper == 'AUTOIT':
+			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#' or arg.upper() == 'PHP' or arg.upper() == 'MATLAB' or arg.upper() == 'UNITY' or arg.upper == 'AUTOIT' or arg.upper() == 'GO' or arg.upper() == 'LUA' or arg.upper() == 'R':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.add_roles(message.author,role)
@@ -1012,7 +1012,7 @@ async def on_message(message):
 			arg = message.content.split(' ')[1]
 			server=client.get_server(os.getenv('SERVER_ID'))
 			role_member = None
-			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#' or arg.upper() == 'PHP' or arg.upper() == 'MATLAB' or arg.upper() == 'UNITY' or arg.upper() == 'AUTOIT':
+			if arg.upper() == 'C++' or arg.upper() == 'PYTHON' or arg.upper() == 'C' or arg.upper() == 'JAVA' or arg.upper() == 'JAVASCRIPT' or arg.upper() == 'HTML-CSS' or arg.upper() == 'RUST'  or arg.upper() == 'ERLANG' or arg.upper() == 'HASKELL' or arg.upper() == 'SQL'  or arg.upper() == 'ASSEMBLY' or arg.upper() == 'VERILOG-VHDL' or arg.upper() == 'C#' or arg.upper() == 'PHP' or arg.upper() == 'MATLAB' or arg.upper() == 'UNITY' or arg.upper() == 'AUTOIT' or arg.upper() == 'GO' or arg.upper() == 'LUA' or arg.upper() == 'R':
 				for role in server.roles:
 					if role.name.upper() == arg.upper():
 						await client.remove_roles(message.author,role)
